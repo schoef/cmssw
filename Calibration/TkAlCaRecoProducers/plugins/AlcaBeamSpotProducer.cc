@@ -7,7 +7,6 @@
    author: Francisco Yumiceva, Fermilab (yumiceva@fnal.gov)
    Geng-Yuan Jeng, UC Riverside (Geng-Yuan.Jeng@cern.ch)
 
-   version $Id: AlcaBeamSpotProducer.cc,v 1.4 2013/05/17 20:25:11 chrjones Exp $
 
    ________________________________________________________________**/
 

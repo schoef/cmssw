@@ -1,7 +1,6 @@
 /* 
  *  \class TSFit
  *
- *  $Date: 2012/02/09 10:08:10 $
  *  \author: Jean-Pierre Pansart - CEA/Saclay
  */
 

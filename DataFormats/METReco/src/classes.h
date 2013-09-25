@@ -1,4 +1,3 @@
-// $Id: classes.h,v 1.35 2012/09/17 21:48:00 sakuma Exp $
 #include "DataFormats/METReco/interface/MET.h"
 #include "Math/Cartesian3D.h" 
 #include "Math/Polar3D.h" 

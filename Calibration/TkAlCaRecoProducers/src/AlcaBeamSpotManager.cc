@@ -1,8 +1,6 @@
 /** \class AlcaBeamSpotManager
  *  No description available.
  *
- *  $Date: 2011/04/07 14:51:32 $
- *  $Revision: 1.8 $
  *  \author L. Uplegger F. Yumiceva - Fermilab
  */
 

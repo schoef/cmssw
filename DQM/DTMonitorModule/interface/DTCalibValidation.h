@@ -5,8 +5,6 @@
  *  Analysis on DT residuals to validate the kFactor
  *
  *
- *  $Date: 2010/06/22 19:10:06 $
- *  $Revision: 1.7 $
  *  \author G. Mila - INFN Torino
  */
 
@@ -117,7 +115,7 @@ class DTCalibValidation: public edm::EDAnalyzer{
   template  <typename type>
     void compute(const DTGeometry *dtGeom,
 		 const DTRecSegment4D& segment,
-	       std::map<DTWireId, std::vector<type> > recHitsPerWire,
+	       const std::map<DTWireId, std::vector<type> >& recHitsPerWire,
 		 int step);
 
   // Book a set of histograms for a give chamber

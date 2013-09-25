@@ -5,8 +5,6 @@
 //   Description: Extrapolator
 //
 //
-//   $Date: 2008/11/28 10:30:51 $
-//   $Revision: 1.10 $
 //
 //   Author :
 //   N. Neumeister            CERN EP

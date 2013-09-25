@@ -7,8 +7,6 @@
  *  This class derives from EDFilter and adds a few HLT specific items.
  *  All HLT filters that wish to save summary objects for the AOD must derive from the HLTFilter class.
  *
- *  $Date: 2012/02/01 13:50:55 $
- *  $Revision: 1.10 $
  *
  *  \author Martin Grunewald
  *
@@ -16,10 +14,12 @@
 
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/EDFilter.h"
-#include "FWCore/Framework/interface/CurrentProcessingContext.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/ParameterSet/interface/ParameterSetDescription.h"
 #include "DataFormats/HLTReco/interface/TriggerFilterObjectWithRefs.h"
+
+#include <string>
+#include <utility>
 
 //
 // class decleration
@@ -47,10 +47,10 @@ public:
   }
 
 public:
-  int path() const;
-  int module() const;
-  std::pair<int,int> pmid() const;
-  const std::string* pathName() const;
+  int path(edm::Event const&) const;
+  int module(edm::Event const&) const;
+  std::pair<int,int> pmid(edm::Event const&) const;
+  const std::string* pathName(edm::Event const&) const;
   const std::string* moduleLabel() const;
 };
 

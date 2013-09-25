@@ -1,5 +1,4 @@
 // -*- C++ -*-
-// $Id: CorrectedPFMETProducer2.cc,v 1.1 2013/01/15 06:49:03 sakuma Exp $
 
 //____________________________________________________________________________||
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -39,7 +38,7 @@ private:
   edm::InputTag src_;
   std::vector<edm::InputTag> srcCorrections_;
 
-  void produce(edm::Event& evt, const edm::EventSetup& es)
+  void produce(edm::Event& evt, const edm::EventSetup& es) override
   {
     edm::Handle<METCollection> srcMETCollection;
     evt.getByLabel(src_, srcMETCollection);

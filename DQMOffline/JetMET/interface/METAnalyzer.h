@@ -6,8 +6,6 @@
  *
  *  DQM monitoring source for MET (Mu corrected/TcMET)
  *
- *  $Date: 2012/05/20 13:11:46 $
- *  $Revision: 1.26 $
  *  \author A.Apresyan - Caltech
  */
 

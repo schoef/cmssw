@@ -6,8 +6,6 @@
  *  This plugin reads only the t0 from pulses from the DB.
  *
  *
- *  $Date: 2009/10/21 17:05:47 $
- *  $Revision: 1.2 $
  *  \author G. Cerminara - INFN Torino
  */
 

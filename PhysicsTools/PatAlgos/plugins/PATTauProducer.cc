@@ -1,5 +1,4 @@
 //
-// $Id: PATTauProducer.cc,v 1.37 2012/05/20 20:12:25 rwolf Exp $
 //
 
 #include "PhysicsTools/PatAlgos/plugins/PATTauProducer.h"

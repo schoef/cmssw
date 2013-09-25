@@ -5,15 +5,12 @@
  *  to MC and (eventually) data. 
  *  Implementation file contents follow.
  *
- *  $Date: 2013/06/07 20:06:25 $
- *  $Revision: 1.78 $
  *  \author Vyacheslav Krutelyov (slava77)
  */
 
 //
 // Original Author:  Vyacheslav Krutelyov
 //         Created:  Fri Mar  3 16:01:24 CST 2006
-// $Id: SteppingHelixPropagator.cc,v 1.78 2013/06/07 20:06:25 slava77 Exp $
 //
 //
 

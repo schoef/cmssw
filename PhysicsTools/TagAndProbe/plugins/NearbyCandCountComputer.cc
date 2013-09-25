@@ -1,5 +1,4 @@
 //
-// $Id: NearbyCandCountComputer.cc,v 1.3 2010/10/05 15:05:10 gpetrucc Exp $
 //
 
 /**
@@ -9,7 +8,7 @@
             Implementation notice: not templated, because we want to allow cuts on the pair through PATDiObjectProxy
             
   \author   Giovanni Petrucciani
-  \version  $Id: NearbyCandCountComputer.cc,v 1.3 2010/10/05 15:05:10 gpetrucc Exp $
+  \version  $Id: NearbyCandCountComputer.cc,v 1.2 2010/07/09 14:03:51 gpetrucc Exp $
 */
 
 
@@ -33,7 +32,7 @@ class NearbyCandCountComputer : public edm::EDProducer {
         explicit NearbyCandCountComputer(const edm::ParameterSet & iConfig);
         virtual ~NearbyCandCountComputer() ;
 
-        virtual void produce(edm::Event & iEvent, const edm::EventSetup & iSetup);
+        virtual void produce(edm::Event & iEvent, const edm::EventSetup & iSetup) override;
 
     private:
         edm::InputTag probes_;            

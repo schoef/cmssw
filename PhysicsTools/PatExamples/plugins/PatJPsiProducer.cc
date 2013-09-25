@@ -13,7 +13,6 @@
 //
 // Original Author:  "Salvatore Rappoccio"
 //         Created:  Mon Sep 28 12:53:57 CDT 2009
-// $Id: PatJPsiProducer.cc,v 1.2 2009/10/20 12:24:28 hegner Exp $
 //
 //
 
@@ -54,9 +53,9 @@ class PatJPsiProducer : public edm::EDProducer {
       ~PatJPsiProducer();
 
    private:
-      virtual void beginJob() ;
-      virtual void produce(edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+      virtual void beginJob() override ;
+      virtual void produce(edm::Event&, const edm::EventSetup&) override;
+      virtual void endJob() override ;
       
       // ----------member data ---------------------------
 

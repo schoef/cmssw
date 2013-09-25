@@ -14,7 +14,6 @@
 //
 // Original Author:  Michel Della Negra
 //         Created:  Wed Jan 23 10:11:13 CET 2008
-// $Id: PFJetBenchmarkAnalyzer.cc,v 1.3 2010/02/20 21:02:43 wmtan Exp $
 // Extensions by Joanna Weng
 //
 
@@ -55,9 +54,9 @@ public:
 
 
 private:
-  virtual void beginJob() ;
-  virtual void analyze(const edm::Event&, const edm::EventSetup&);
-  virtual void endJob() ;
+  virtual void beginJob() override ;
+  virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
+  virtual void endJob() override ;
   // ----------member data ---------------------------
 
 };

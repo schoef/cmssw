@@ -4,8 +4,6 @@
 /*
  * \file L1TDTTPG.h
  *
- * $Date: 2009/11/19 14:32:09 $
- * $Revision: 1.9 $
  * \author J. Berryhill
  *
  */
@@ -98,7 +96,7 @@ class L1TDTTPG : public edm::EDAnalyzer {
   std::string outputFile_; //file name for ROOT ouput
   bool verbose_;
   bool monitorDaemon_;
-  ofstream logFile_;
+  std::ofstream logFile_;
   edm::InputTag dttpgSource_;
 };
 

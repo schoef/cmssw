@@ -8,7 +8,6 @@
 //
 // Original Author:
 //         Created:  Sun Jan  6 23:57:00 EST 2008
-// $Id: FWDTSegmentProxyBuilder.cc,v 1.14 2010/11/11 20:25:28 amraktad Exp $
 //
 
 #include "TEveGeoNode.h"
@@ -34,7 +33,7 @@ private:
    FWDTSegmentProxyBuilder( const FWDTSegmentProxyBuilder& );
    const FWDTSegmentProxyBuilder& operator=( const FWDTSegmentProxyBuilder& );
 
-   void build( const DTRecSegment4D& iData, unsigned int iIndex, TEveElement& oItemHolder, const FWViewContext* );
+   void build( const DTRecSegment4D& iData, unsigned int iIndex, TEveElement& oItemHolder, const FWViewContext* ) override;
 };
 
 void

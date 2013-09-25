@@ -1,8 +1,6 @@
  /*
  * \file L1TRate_Offline.cc
  *
- * $Date: 2012/12/03 15:03:34 $
- * $Revision: 1.6 $
  * \author J. Pela, P. Musella
  *
  */

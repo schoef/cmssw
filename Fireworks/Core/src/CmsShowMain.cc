@@ -8,7 +8,6 @@
 //
 // Original Author:
 //         Created:  Mon Dec  3 08:38:38 PST 2007
-// $Id: CmsShowMain.cc,v 1.204 2012/11/16 02:20:14 amraktad Exp $
 //
 
 // system include files
@@ -384,7 +383,7 @@ public:
       Start(0, kTRUE);
    }
 
-   virtual Bool_t Notify()
+   virtual Bool_t Notify() override
    {
       TurnOff();
       fApp->doExit();

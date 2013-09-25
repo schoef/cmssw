@@ -1,7 +1,5 @@
 /** \file
  *
- *  $Date: 2011/04/16 10:20:40 $
- *  $Revision: 1.3 $
  *  \author Massimiliano Chiorboli, updated NA 03/08
  */
 

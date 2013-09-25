@@ -12,7 +12,6 @@
  * \author Fedor Ratnikov, UMd
  *
  * \version   Original March 31, 2006 by F.R.
- * \version   $Id: GenJet.h,v 1.19 2008/05/26 11:22:12 arizzi Exp $
  ************************************************************/
 
 

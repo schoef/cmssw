@@ -4,9 +4,6 @@
 /** \class GEDPhotonCoreProducer
  **  
  **
- **  $Id: GEDPhotonCoreProducer.cc,v 1.1 2013/05/07 12:33:37 nancy Exp $ 
- **  $Date: 2013/05/07 12:33:37 $ 
- **  $Revision: 1.1 $
  **  \author Nancy Marinelli, U. of Notre Dame, US
  **
  ***/
@@ -156,7 +153,7 @@ void GEDPhotonCoreProducer::produce(edm::Event &theEvent, const edm::EventSetup&
 } 
 
 
-void GEDPhotonCoreProducer::createSingleLegConversions(reco::CaloClusterPtr sc,  std::vector<reco::TrackRef>  conv, std::vector<float> mva,  reco::ConversionCollection &oneLegConversions) {
+void GEDPhotonCoreProducer::createSingleLegConversions(reco::CaloClusterPtr sc,  const std::vector<reco::TrackRef>&  conv, const std::vector<float>& mva,  reco::ConversionCollection &oneLegConversions) {
   // this method translates the single track into the Conversion Data Format
 
   math::Error<3>::type error;

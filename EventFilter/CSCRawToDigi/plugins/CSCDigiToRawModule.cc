@@ -1,7 +1,5 @@
 /** \file
  *
- *  $Date: 2010/07/20 02:58:29 $
- *  $Revision: 1.12 $
  *  \author A. Tumanov - Rice
  */
 

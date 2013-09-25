@@ -23,7 +23,6 @@
 //
 // Original Author:  "Salvatore Rappoccio"
 //         Created:  Thu Jul  3 00:19:30 CDT 2008
-// $Id: CATopJetTagger.h,v 1.1 2012/10/11 14:26:45 eulisse Exp $
 //
 //
 

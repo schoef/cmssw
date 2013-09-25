@@ -1,5 +1,4 @@
 //
-// $Id: TauPFSpecific.h,v 1.7 2011/09/29 16:34:56 veelken Exp $
 //
 
 #ifndef DataFormats_PatCandidates_Tau_PFSpecific_h
@@ -10,7 +9,6 @@
   \brief    Structure to hold information specific to a PFTau inside a pat::Tau
 
   \author   Giovanni Petrucciani
-  \version  $Id: TauPFSpecific.h,v 1.7 2011/09/29 16:34:56 veelken Exp $
 */
 
 #include "DataFormats/TauReco/interface/PFTau.h"

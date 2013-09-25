@@ -4,8 +4,6 @@
 /** \class DTCalibDBUtils
  *  Simple interface to PoolDBOutputService to write objects to DB.
  *
- *  $Date: 2008/03/06 14:41:12 $
- *  $Revision: 1.3 $
  *  \author G. Cerminara - INFN Torino
  */
 

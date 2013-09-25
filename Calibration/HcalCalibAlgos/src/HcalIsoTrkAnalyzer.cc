@@ -14,7 +14,6 @@
 // Original Authors: Andrey Pozdnyakov, Sergey Petrushanko,
 //                   Grigory Safronov, Olga Kodolova
 //         Created:  Thu Jul 12 18:12:19 CEST 2007
-// $Id: HcalIsoTrkAnalyzer.cc,v 1.27 2012/11/12 21:08:18 dlange Exp $
 //
 //
 
@@ -98,9 +97,9 @@ public:
   //double getDistInPlaneSimple(const GlobalPoint caloPoint, const GlobalPoint rechitPoint);
 
 private:
-  virtual void beginJob() ;
-  virtual void analyze(const edm::Event&, const edm::EventSetup&);
-  virtual void endJob() ;
+  virtual void beginJob() override ;
+  virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
+  virtual void endJob() override ;
   
   // ----------member data ---------------------------
   
@@ -161,7 +160,7 @@ private:
   Float_t tagJetEmFrac; // dijet
   Float_t probeJetEmFrac; // dijet
   
-  ofstream input_to_L3;
+  std::ofstream input_to_L3;
   
 };
 

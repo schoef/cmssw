@@ -5,8 +5,8 @@
  *
  *  Class to misaligned tracker from DB.
  *
- *  $Date: 2012/06/13 16:23:32 $
- *  $Revision: 1.6 $
+ *  $Date: 2012/06/13 09:24:50 $
+ *  $Revision: 1.5 $
  *  \author Chung Khim Lae
  */
 // user include files
@@ -40,7 +40,7 @@ private:
 	
 	void applySystematicMisalignment( Alignable* ); 
 	//align::GlobalVector findSystematicMis( align::PositionType );
-	align::GlobalVector findSystematicMis( align::PositionType, const bool blindToZ, const bool blindToR );
+	align::GlobalVector findSystematicMis( const align::PositionType&, const bool blindToZ, const bool blindToR );
 	
 	AlignableTracker* theAlignableTracker;
 	

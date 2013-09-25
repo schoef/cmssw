@@ -13,8 +13,6 @@
 //
 // Original Author:  Gobinda Majumder
 //         Created:  Sat Jul  7 09:51:31 CEST 2007
-// $Id: HOCalibAnalyzer.cc,v 1.12 2012/09/27 20:32:04 wdd Exp $
-// $Id: HOCalibAnalyzer.cc,v 1.12 2012/09/27 20:32:04 wdd Exp $
 //
 //
 
@@ -224,9 +222,9 @@ class HOCalibAnalyzer : public edm::EDAnalyzer {
 
    private:
 
-      virtual void beginJob() ;
-      virtual void analyze(const edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+      virtual void beginJob() override ;
+      virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
+      virtual void endJob() override ;
 
       TFile* theFile;
       std::string theRootFileName;
@@ -1767,7 +1765,7 @@ HOCalibAnalyzer::endJob() {
     int iiter = 0;
 
 
-    ofstream file_out(theoutputtxtFile.c_str());
+    std::ofstream file_out(theoutputtxtFile.c_str());
     //    TPostScript* ps=0;
     int ips=111;
     TPostScript ps(theoutputpsFile.c_str(),ips);
@@ -1777,13 +1775,15 @@ HOCalibAnalyzer::endJob() {
     ysiz = 1200; //600;
     TCanvas *c0 = new TCanvas("c0", " Pedestal vs signal", xsiz, ysiz);
 
-    float mean_eta[nphimx];
-    float mean_phi[netamx];
-    float rms_eta[nphimx];
-    float rms_phi[netamx];
+// Fix is done for eta-phi
 
-    for (int ij=0; ij<nphimx; ij++) {mean_phi[ij] = rms_phi[ij] =0;}
-    for (int ij=0; ij<netamx; ij++) {mean_eta[ij] = rms_eta[ij] =0;}
+    float mean_eta[netamx];
+    float mean_phi[nphimx];
+    float rms_eta[netamx];
+    float rms_phi[nphimx];
+
+    for (int ij=0; ij<nphimx; ++ij) {mean_phi[ij] = 0; rms_phi[ij] = 0;}
+    for (int ij=0; ij<netamx; ++ij) {mean_eta[ij] = 0; rms_eta[ij] = 0;}
 
     int mxeta = 0;
     int mxphi = 0;

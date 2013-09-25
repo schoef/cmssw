@@ -13,7 +13,6 @@
 //
 // Original Author:  Giovanni FRANZONI
 //         Created:  Wed Sep 19 16:21:29 CEST 2007
-// $Id: EcalMIPRecHitFilter.cc,v 1.7 2012/01/21 14:56:54 fwyzard Exp $
 //
 //
 
@@ -58,9 +57,9 @@ class EcalMIPRecHitFilter : public HLTFilter {
       ~EcalMIPRecHitFilter();
 
    private:
-      virtual void beginJob() ;
-      virtual bool hltFilter(edm::Event&, const edm::EventSetup&, trigger::TriggerFilterObjectWithRefs & filterproduct);
-      virtual void endJob() ;
+      virtual void beginJob() override ;
+      virtual bool hltFilter(edm::Event&, const edm::EventSetup&, trigger::TriggerFilterObjectWithRefs & filterproduct) override;
+      virtual void endJob() override ;
       
       // ----------member data ---------------------------
 

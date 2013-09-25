@@ -1,5 +1,4 @@
 //
-// $Id: Muon.cc,v 1.33 2012/09/27 09:52:17 bellan Exp $
 //
 
 #include "DataFormats/PatCandidates/interface/Muon.h"

@@ -1,5 +1,4 @@
 //
-// $Id: PATJetSelector.h,v 1.7 2013/02/27 23:26:56 wmtan Exp $
 //
 
 #ifndef PhysicsTools_PatAlgos_PATJetSelector_h

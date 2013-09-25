@@ -6,7 +6,6 @@
 
 /** \class EcalRecHit
  *  
- * $Id: EcalRecHit.h,v 1.25 2012/11/05 21:55:41 argiro Exp $
  * \author P. Meridiani INFN Roma1
  */
 

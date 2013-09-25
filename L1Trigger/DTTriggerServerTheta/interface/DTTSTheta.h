@@ -3,8 +3,6 @@
 /**  \class DTTSTheta
  *    Implementation of TS Theta L1Trigger algorithm
  *
- *   $Date: 2008/09/05 15:57:29 $
- *   $Revision: 1.7 $
  *
  *   \author C.Grandi
  */

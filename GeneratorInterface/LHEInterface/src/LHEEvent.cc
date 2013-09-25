@@ -8,10 +8,10 @@
 #include <memory>
 #include <cmath>
 
-#include <HepMC/GenEvent.h>
-#include <HepMC/GenVertex.h>
-#include <HepMC/GenParticle.h>
-#include <HepMC/SimpleVector.h>
+#include "HepMC/GenEvent.h"
+#include "HepMC/GenVertex.h"
+#include "HepMC/GenParticle.h"
+#include "HepMC/SimpleVector.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
@@ -485,9 +485,10 @@ const HepMC::GenVertex *LHEEvent::findSignalVertex(
 }
 
 static void fixSubTree(HepMC::GenVertex *vertex,
-                       HepMC::FourVector time,
+                       HepMC::FourVector& _time,
                        std::set<const HepMC::GenVertex*> &visited)
 {
+	HepMC::FourVector time = _time;
 	HepMC::FourVector curTime = vertex->position();
 	bool needsFixup = curTime.t() < time.t();
 

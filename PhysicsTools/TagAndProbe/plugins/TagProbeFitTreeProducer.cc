@@ -13,7 +13,6 @@
 //
 // Original Author:  Sep 15 09:45
 //         Created:  Mon Sep 15 09:49:08 CEST 2008
-// $Id: TagProbeFitTreeProducer.cc,v 1.7 2010/05/02 15:18:25 gpetrucc Exp $
 //
 //
 
@@ -55,8 +54,8 @@ class TagProbeFitTreeProducer : public edm::EDAnalyzer {
 
 
    private:
-      virtual void analyze(const edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+      virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
+      virtual void endJob() override ;
 
       //---- MC truth information
       /// Is this sample MC?

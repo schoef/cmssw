@@ -8,7 +8,6 @@
 //
 // Original Author:  Chris Jones
 //         Created:  Tue Nov 25 14:42:13 EST 2008
-// $Id: FWTrackProxyBuilderFF.cc,v 1.4 2012/10/22 20:08:20 amraktad Exp $
 //
 
 // system include files
@@ -40,14 +39,14 @@ public:
 
    REGISTER_PROXYBUILDER_METHODS();
    
-   virtual void setItem(const FWEventItem* iItem);
-   virtual bool visibilityModelChanges(const FWModelId&, TEveElement*, FWViewType::EType, const FWViewContext*);
+   virtual void setItem(const FWEventItem* iItem) override;
+   virtual bool visibilityModelChanges(const FWModelId&, TEveElement*, FWViewType::EType, const FWViewContext*) override;
    
 private:
    FWTrackProxyBuilderFF(const FWTrackProxyBuilderFF&); // stop default
    const FWTrackProxyBuilderFF& operator=(const FWTrackProxyBuilderFF&); // stop default
 
-   void build(const FWEventItem* iItem, TEveElementList* product, const FWViewContext*);
+   void build(const FWEventItem* iItem, TEveElementList* product, const FWViewContext*) override;
    void buildTrack(TrajTrackAssociationCollection::const_iterator it, TEveCompound* comp);
 
    

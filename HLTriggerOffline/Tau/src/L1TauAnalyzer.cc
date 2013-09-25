@@ -13,7 +13,6 @@
 //
 // Original Author:  Chi Nhan Nguyen
 //         Created:  Fri Feb 22 09:20:55 CST 2008
-// $Id: L1TauAnalyzer.cc,v 1.7 2011/10/31 13:05:55 olzem Exp $
 //
 //
 

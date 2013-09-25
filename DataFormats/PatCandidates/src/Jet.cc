@@ -1,5 +1,4 @@
 //
-// $Id: Jet.cc,v 1.44 2011/06/08 20:40:19 rwolf Exp $
 //
 
 #include "DataFormats/PatCandidates/interface/Jet.h"

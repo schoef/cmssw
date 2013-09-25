@@ -16,7 +16,6 @@
 //
 // Original Author:  
 //         Created:  Fri Nov 25 17:36:41 EST 2005
-// $Id: SimTrackManager.h,v 1.14 2013/05/30 21:14:57 gartung Exp $
 //
 
 // system include files

@@ -110,12 +110,12 @@ public:
   HcalDetDiagLEDMonitor(const edm::ParameterSet& ps); 
   ~HcalDetDiagLEDMonitor(); 
 
-  void beginRun(const edm::Run& run, const edm::EventSetup& c);
-  void setup();
-  void analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup);// const HcalDbService& cond)
-  void endRun(const edm::Run& run, const edm::EventSetup& c);
-  void reset();
-  void cleanup(); 
+  void beginRun(const edm::Run& run, const edm::EventSetup& c) override;
+  void setup() override;
+  void analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup) override;// const HcalDbService& cond)
+  void endRun(const edm::Run& run, const edm::EventSetup& c) override;
+  void reset() override;
+  void cleanup() override; 
   void fillHistos();
   int  GetStatistics(){ return ievt_; }
 private:
@@ -813,7 +813,7 @@ char   Subdet[10],str[500];
 
       sprintf(str,"HcalDetDiagLED_%i_%i.xml",run_number,dataset_seq_number);
       std::string xmlName=str;
-      ofstream xmlFile;
+      std::ofstream xmlFile;
       xmlFile.open(xmlName.c_str());
 
       xmlFile<<"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n";
@@ -925,7 +925,7 @@ char   Subdet[10],str[500];
       //create CALIB XML file 
       sprintf(str,"HcalDetDiagLEDCalib_%i_%i.xml",run_number,dataset_seq_number);
       std::string xmlNameCalib=str;
-      ofstream xmlFileCalib;
+      std::ofstream xmlFileCalib;
       xmlFileCalib.open(xmlNameCalib.c_str());
 
       xmlFileCalib<<"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n";

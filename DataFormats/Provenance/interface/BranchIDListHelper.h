@@ -17,11 +17,11 @@ namespace edm {
     typedef std::map<BranchListIndex, BranchListIndex> BranchListIndexMapper;
     BranchIDListHelper();
     bool updateFromInput(BranchIDLists const& bidlists);
-    void updateRegistries(ProductRegistry const& reg);
+    void updateRegistries(ProductRegistry& reg);
     void fixBranchListIndexes(BranchListIndexes& indexes);
 
     BranchIDLists const& branchIDLists() const {return branchIDLists_;}
-    BranchIDLists& branchIDLists() {return branchIDLists_;}
+    BranchIDLists& mutableBranchIDLists() {return branchIDLists_;}
     BranchIDToIndexMap const& branchIDToIndexMap() const {return branchIDToIndexMap_;}
 
   private:

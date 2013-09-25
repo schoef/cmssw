@@ -16,9 +16,7 @@
  *
  * \author Christian Veelken, LLR
  *
- * \version $Revision: 1.1 $
  *
- * $Id: ShiftedPFCandidateProducerForNoPileUpPFMEt.h,v 1.1 2012/08/31 10:06:13 veelken Exp $
  *
  */
 

@@ -5,8 +5,6 @@
 //   Description: Sector Receiver 
 //
 //
-//   $Date: 2012/07/05 12:37:10 $
-//   $Revision: 1.22 $
 //
 //   Author :
 //   N. Neumeister            CERN EP

@@ -1,8 +1,6 @@
 /*
  * \file EEClusterTask.cc
  *
- * $Date: 2012/04/27 13:46:14 $
- * $Revision: 1.86 $
  * \author G. Della Ricca
  * \author E. Di Marco
  *
@@ -20,11 +18,8 @@
 
 #include "DQMServices/Core/interface/DQMStore.h"
 
-#include "DataFormats/EcalRawData/interface/EcalRawDataCollections.h"
 #include "DataFormats/EgammaReco/interface/BasicCluster.h"
-#include "DataFormats/EgammaReco/interface/BasicClusterFwd.h"
 #include "DataFormats/EgammaReco/interface/SuperCluster.h"
-#include "DataFormats/EgammaReco/interface/SuperClusterFwd.h"
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "RecoEcal/EgammaCoreTools/interface/EcalClusterTools.h"
 #include "Geometry/CaloTopology/interface/CaloTopology.h"
@@ -53,10 +48,10 @@ EEClusterTask::EEClusterTask(const edm::ParameterSet& ps){
   mergeRuns_ = ps.getUntrackedParameter<bool>("mergeRuns", false);
 
   // parameters...
-  EcalRawDataCollection_ = ps.getParameter<edm::InputTag>("EcalRawDataCollection");
-  BasicClusterCollection_ = ps.getParameter<edm::InputTag>("BasicClusterCollection");
-  SuperClusterCollection_ = ps.getParameter<edm::InputTag>("SuperClusterCollection");
-  EcalRecHitCollection_ = ps.getParameter<edm::InputTag>("EcalRecHitCollection");
+  EcalRawDataCollection_ = consumes<EcalRawDataCollection>(ps.getParameter<edm::InputTag>("EcalRawDataCollection"));
+  BasicClusterCollection_ = consumes<reco::BasicClusterCollection>(ps.getParameter<edm::InputTag>("BasicClusterCollection"));
+  SuperClusterCollection_ = consumes<reco::SuperClusterCollection>(ps.getParameter<edm::InputTag>("SuperClusterCollection"));
+  EcalRecHitCollection_ = consumes<EcalRecHitCollection>(ps.getParameter<edm::InputTag>("EcalRecHitCollection"));
 
   // histograms...
   meBCEne_ = 0;
@@ -675,7 +670,7 @@ void EEClusterTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 
   edm::Handle<EcalRawDataCollection> dcchs;
 
-  if ( e.getByLabel(EcalRawDataCollection_, dcchs) ) {
+  if ( e.getByToken(EcalRawDataCollection_, dcchs) ) {
 
     for ( EcalRawDataCollection::const_iterator dcchItr = dcchs->begin(); dcchItr != dcchs->end(); ++dcchItr ) {
 
@@ -698,7 +693,7 @@ void EEClusterTask::analyze(const edm::Event& e, const edm::EventSetup& c){
   } else {
 
     enable = true;
-    edm::LogWarning("EEClusterTask") << EcalRawDataCollection_ << " not available";
+    edm::LogWarning("EEClusterTask") << "EcalRawDataCollection not available";
 
   }
 
@@ -719,9 +714,9 @@ void EEClusterTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 
   // recHits
   edm::Handle< EcalRecHitCollection > pEERecHits;
-  e.getByLabel( EcalRecHitCollection_, pEERecHits );
+  e.getByToken( EcalRecHitCollection_, pEERecHits );
   if ( !pEERecHits.isValid() ) {
-    edm::LogWarning("EEClusterTask") << "RecHit collection " << EcalRecHitCollection_ << " not available.";
+    edm::LogWarning("EEClusterTask") << "RecHit collection not available.";
     return;
   }
   const EcalRecHitCollection* eeRecHits = pEERecHits.product();
@@ -730,7 +725,7 @@ void EEClusterTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 
   // --- Endcap Basic Clusters ---
   edm::Handle<reco::BasicClusterCollection> pBasicClusters;
-  if ( e.getByLabel(BasicClusterCollection_, pBasicClusters) ) {
+  if ( e.getByToken(BasicClusterCollection_, pBasicClusters) ) {
 
     int nbcc = pBasicClusters->size();
     if (nbcc>0) meBCNum_->Fill(float(nbcc));
@@ -785,7 +780,7 @@ void EEClusterTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 
   } else {
 
-    edm::LogWarning("EEClusterTask") << BasicClusterCollection_ << " not available";
+    edm::LogWarning("EEClusterTask") << "BasicClusterCollection not available";
 
   }
 
@@ -819,7 +814,7 @@ void EEClusterTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 
   // --- Endcap Super Clusters ----
   edm::Handle<reco::SuperClusterCollection> pSuperClusters;
-  if ( e.getByLabel(SuperClusterCollection_, pSuperClusters) ) {
+  if ( e.getByToken(SuperClusterCollection_, pSuperClusters) ) {
 
     int nscc = pSuperClusters->size();
     if ( nscc > 0 ) meSCNum_->Fill(float(nscc));
@@ -914,7 +909,7 @@ void EEClusterTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 
   } else {
 
-    edm::LogWarning("EEClusterTask") << SuperClusterCollection_ << " not available";
+    edm::LogWarning("EEClusterTask") << "SuperClusterCollection not available";
 
   }
 

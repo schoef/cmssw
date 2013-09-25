@@ -5,8 +5,6 @@
  *
  *
  *
- *  $Date: 2009/10/31 05:17:36 $
- *  $Revision: 1.5 $
  *
  *  \author Adam Everett        Purdue University
  */
@@ -24,6 +22,10 @@
 #include "FWCore/Framework/interface/MakerMacros.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+
+#include "DataFormats/Common/interface/View.h"
+#include "DataFormats/TrackReco/interface/Track.h"
+#include "DataFormats/TrackReco/interface/TrackFwd.h"
 
 #include "TrackingTools/TrajectoryState/interface/TrajectoryStateOnSurface.h"
 
@@ -64,6 +66,7 @@ class GlobalMuonMatchAnalyzer : public edm::EDAnalyzer {
   const TrackAssociatorBase *tkAssociator_, *muAssociator_;
   std::string tkAssociatorName_, muAssociatorName_;
   edm::InputTag tkName_, tpName_, glbName_, staName_;
+  edm::EDGetTokenT<edm::View<reco::Track> >  tkToken_, tpToken_, glbToken_, staToken_;
 
 
 };

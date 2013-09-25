@@ -4,8 +4,6 @@
 /** \class Histograms
  *  Collection of histograms for GLB muon analysis
  *
- *  $Date: 2012/12/20 16:09:21 $
- *  $Revision: 1.17 $
  *  \author S. Bolognesi - INFN Torino / T.Dorigo - INFN Padova
  */
 

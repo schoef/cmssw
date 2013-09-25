@@ -6,8 +6,6 @@
  *
  *  DQM monitoring source for muon track seeds
  *
- *  $Date: 2009/12/22 17:42:59 $
- *  $Revision: 1.8 $
  *  \author G. Mila - INFN Torino
  */
 

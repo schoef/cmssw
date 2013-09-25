@@ -1,5 +1,4 @@
 // -*- C++ -*-
-// $Id: Type2CorrectionProducer.cc,v 1.1 2013/01/15 06:49:10 sakuma Exp $
 
 //____________________________________________________________________________||
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -99,7 +98,7 @@ private:
 
   std::vector<type2BinningEntryType*> type2Binning_;
 
-  void produce(edm::Event&, const edm::EventSetup&);
+  void produce(edm::Event&, const edm::EventSetup&) override;
 
 };
 

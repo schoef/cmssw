@@ -17,7 +17,7 @@
 // part of the code was inspired by http://cmssw.cvs.cern.ch/cgi-bin/cmssw.cgi/UserCode/YGao/LhcTrackAnalyzer/
 // part of the code was inspired by 
 // other inputs from Andrea Giammanco, Gaelle Boudoul, Andrea Venturi, Steven Lowette, Gavril Giurgiu
-// $Id: TrackerDpgAnalysis.cc,v 1.15 2013/05/17 11:48:53 delaer Exp $
+// $Id: TrackerDpgAnalysis.cc,v 1.14 2013/02/27 19:49:47 wmtan Exp $
 //
 //
 
@@ -130,7 +130,7 @@ class TrackerDpgAnalysis : public edm::EDAnalyzer {
    private:
       virtual void beginRun(const edm::Run&, const edm::EventSetup&) override;
       virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
-      virtual void endJob() ;
+      virtual void endJob() override ;
 
       // ----------member data ---------------------------
       static const int nMaxPVs_ = 50;
@@ -1001,7 +1001,7 @@ TrackerDpgAnalysis::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup
    if(delayMap.size()) tmap.save(true, 0, 0, "delaymap.png");
 
    // cabling II (DCU map)
-   ifstream cablingFile(cablingFileName_.c_str());
+   std::ifstream cablingFile(cablingFileName_.c_str());
    if(cablingFile.is_open()) {
      char buffer[1024];
      cablingFile.getline(buffer,1024);

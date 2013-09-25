@@ -1,5 +1,4 @@
 //
-// $Id: CandidateSummaryTable.cc,v 1.5 2013/02/27 23:26:56 wmtan Exp $
 //
 
 /**
@@ -9,7 +8,7 @@
   FIXME FIXME Move to CandAlgos
 
   \author   Giovanni Petrucciani
-  \version  $Id: CandidateSummaryTable.cc,v 1.5 2013/02/27 23:26:56 wmtan Exp $
+  \version  $Id: CandidateSummaryTable.cc,v 1.4 2010/02/20 21:00:15 wmtan Exp $
 */
 
 
@@ -30,7 +29,7 @@ namespace pat {
       ~CandidateSummaryTable();  
 
       virtual void analyze(const edm::Event & iEvent, const edm::EventSetup& iSetup) override;
-      virtual void endJob();
+      virtual void endJob() override;
 
     private:
       struct Record {

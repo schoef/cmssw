@@ -16,12 +16,12 @@
 //
 // Original Author:  Chris D. Jones
 //         Created:  Mon Nov 28 16:02:21 EST 2005
-// $Id: SimProducer.h,v 1.2 2010/03/26 22:55:39 sunanda Exp $
 //
 
 // system include files
 #include <string>
 #include <vector>
+#include "boost/bind.hpp"
 #include "boost/shared_ptr.hpp"
 
 // user include files

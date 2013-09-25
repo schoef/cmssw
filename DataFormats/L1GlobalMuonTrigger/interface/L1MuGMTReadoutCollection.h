@@ -5,8 +5,6 @@
 //   Description: 
 //
 //
-//   $Date: 2011/11/10 17:02:05 $
-//   $Revision: 1.6 $
 //
 //   Author :
 //   Hannes Sakulin                  HEPHY Vienna

@@ -1,5 +1,4 @@
 //
-// $Id: PATCompositeCandidateProducer.cc,v 1.3 2009/06/25 23:49:35 gpetrucc Exp $
 //
 
 #include "PhysicsTools/PatAlgos/plugins/PATCompositeCandidateProducer.h"

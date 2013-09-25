@@ -12,6 +12,10 @@ namespace edm {
 
   bool
   BranchIDListHelper:: updateFromInput(BranchIDLists const& bidlists) {
+    //The BranchIDLists is a list of lists
+    // this routine compares bidlists to branchIDLists_ to see if a list
+    // in branchIDLists_ is already in bidlist and if it isn't we insert
+    // that new list into branchIDLists_
     bool unchanged = true;
     branchListIndexMapper_.clear();
     typedef BranchIDLists::const_iterator Iter;
@@ -35,7 +39,7 @@ namespace edm {
   }
 
   void
-  BranchIDListHelper::updateRegistries(ProductRegistry const& preg) {
+  BranchIDListHelper::updateRegistries(ProductRegistry& preg) {
     BranchIDList bidlist;
     // Add entries for current process for ProductID to BranchID mapping.
     for(ProductRegistry::ProductList::const_iterator it = preg.productList().begin(), itEnd = preg.productList().end();

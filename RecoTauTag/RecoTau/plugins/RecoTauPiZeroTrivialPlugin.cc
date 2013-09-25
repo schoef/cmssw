@@ -7,7 +7,6 @@
  * RecoTauPiZeros.  Each PiZero is composed of only one photon from
  * the jet.
  *
- * $Id $
  *
  */
 
@@ -28,7 +27,7 @@ class RecoTauPiZeroTrivialPlugin : public RecoTauPiZeroBuilderPlugin {
   public:
     explicit RecoTauPiZeroTrivialPlugin(const edm::ParameterSet& pset);
     ~RecoTauPiZeroTrivialPlugin() {}
-    return_type operator()(const reco::PFJet& jet) const;
+    return_type operator()(const reco::PFJet& jet) const override;
   private:
     RecoTauQualityCuts qcuts_;
 };

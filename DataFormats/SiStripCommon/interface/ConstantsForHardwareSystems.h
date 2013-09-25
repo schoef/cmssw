@@ -1,4 +1,3 @@
-// Last commit: $Id: ConstantsForHardwareSystems.h,v 1.9 2010/01/27 13:21:07 bainbrid Exp $
 
 #ifndef DataFormats_SiStripCommon_ConstantsForHardwareSystems_H
 #define DataFormats_SiStripCommon_ConstantsForHardwareSystems_H

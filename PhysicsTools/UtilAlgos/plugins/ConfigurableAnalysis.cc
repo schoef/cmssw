@@ -13,7 +13,6 @@
 //
 // Original Author:  Jean-Roch Vlimant
 //         Created:  Mon Apr 14 11:39:51 CEST 2008
-// $Id: ConfigurableAnalysis.cc,v 1.10 2010/09/28 09:08:33 srappocc Exp $
 //
 //
 
@@ -48,9 +47,9 @@ class ConfigurableAnalysis : public edm::EDFilter {
       ~ConfigurableAnalysis();
 
    private:
-      virtual void beginJob();
-      virtual bool filter(edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+      virtual void beginJob() override;
+      virtual bool filter(edm::Event&, const edm::EventSetup&) override;
+      virtual void endJob() override ;
 
   Selections * selections_;
   Plotter * plotter_;
@@ -127,8 +126,6 @@ ConfigurableAnalysis::~ConfigurableAnalysis()
 // ------------ method called to produce the data  ------------
 bool ConfigurableAnalysis::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-  using namespace edm;
-
   //will the filter pass or not.
   bool majorGlobalAccept=false;
 

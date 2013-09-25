@@ -13,7 +13,7 @@
 //
 // Original Author:  Erik Butz
 //         Created:  Tue Dec 11 14:03:05 CET 2007
-// $Id: TrackerOfflineValidation.cc,v 1.56 2013/01/07 20:46:23 wmtan Exp $
+// $Id: TrackerOfflineValidation.cc,v 1.55 2012/09/28 20:48:06 flucke Exp $
 //
 //
 
@@ -159,7 +159,7 @@ private:
       if (!dqmMode){
 	edm::Service<TFileService> fs;
 	if (newDir.length()==0){
-	  tfd.reset(new TFileDirectory(static_cast<TFileDirectory&>(*fs)));
+	  tfd.reset(new TFileDirectory(fs->tFileDirectory()));
 	}
 	else {
 	  tfd.reset(new TFileDirectory(fs->mkdir(newDir)));
@@ -191,8 +191,8 @@ private:
   // 
   // ------------- private member function -------------
   // 
-  virtual void analyze(const edm::Event&, const edm::EventSetup&);
-  virtual void endJob();
+  virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
+  virtual void endJob() override;
   
   virtual void checkBookHists(const edm::EventSetup& setup);
 

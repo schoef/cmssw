@@ -121,7 +121,7 @@ namespace edm {
     LuminosityBlockPrincipal&
     luminosityBlockPrincipal();
 
-    typedef std::vector<std::pair<EDProduct*, ConstBranchDescription const*> > ProductPtrVec;
+    typedef std::vector<std::pair<EDProduct*, BranchDescription const*> > ProductPtrVec;
     ProductPtrVec& putProducts() {return putProducts_;}
     ProductPtrVec const& putProducts() const {return putProducts_;}
 
@@ -131,7 +131,6 @@ namespace edm {
     // public interface is asking for trouble
     friend class ConfigurableInputSource;
     friend class InputSource;
-    friend class DaqSource;
     friend class RawInputSource;
     friend class EDFilter;
     friend class EDProducer;
@@ -162,7 +161,7 @@ namespace edm {
       DoNotPostInsert<PROD> >::type maybe_inserter;
     maybe_inserter(product.get());
 
-    ConstBranchDescription const& desc =
+    BranchDescription const& desc =
       provRecorder_.getBranchDescription(TypeID(*product), productInstanceName);
 
     Wrapper<PROD> *wp(new Wrapper<PROD>(product));

@@ -1,5 +1,4 @@
 //
-// $Id: PATGenericParticleProducer.cc,v 1.12 2009/10/15 17:17:26 rwolf Exp $
 //
 
 #include "PhysicsTools/PatAlgos/plugins/PATGenericParticleProducer.h"

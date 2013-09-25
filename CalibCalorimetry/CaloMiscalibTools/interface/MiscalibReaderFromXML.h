@@ -5,8 +5,6 @@
  * *
  *  Parses the xml file to get miscalibration constants
  * 
- *  $Date: 2010/08/07 14:55:53 $
- *  $Revision: 1.2 $
  *  \author Lorenzo Agostino
   */
 

@@ -2,8 +2,6 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2013/03/05 15:17:09 $
- *  $Revision: 1.25 $
  *  \author G. Mila - INFN Torino
  *  updated: G. Hesketh, CERN
  */

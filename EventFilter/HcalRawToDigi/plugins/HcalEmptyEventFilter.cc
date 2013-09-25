@@ -13,7 +13,6 @@ Implementation:
 //
 // Original Author:  Jeremiah Mans
 //         Created:  Tue Jun 4 CET 2012
-// $Id: HcalEmptyEventFilter.cc,v 1.1 2012/06/04 19:36:18 mansj Exp $
 //
 //
 
@@ -49,7 +48,7 @@ public:
   virtual ~HcalEmptyEventFilter();
   
 private:
-  virtual bool filter(edm::Event&, const edm::EventSetup&);
+  virtual bool filter(edm::Event&, const edm::EventSetup&) override;
   
   // ----------member data ---------------------------
   

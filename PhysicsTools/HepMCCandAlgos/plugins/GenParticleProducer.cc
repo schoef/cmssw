@@ -5,7 +5,6 @@
  * Convert HepMC GenEvent format into a collection of type
  * CandidateCollection containing objects of type GenParticle
  *
- * \version $Id: GenParticleProducer.cc,v 1.20 2013/02/27 23:16:51 wmtan Exp $
  *
  */
 #include "FWCore/Framework/interface/EDProducer.h"

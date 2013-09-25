@@ -6,8 +6,6 @@
  *
  *  DQM monitoring source for muon reco track
  *
- *  $Date: 2012/08/27 11:46:54 $
- *  $Revision: 1.6 $
  *  \author S. Goy Lopez, CIEMAT
  */
 

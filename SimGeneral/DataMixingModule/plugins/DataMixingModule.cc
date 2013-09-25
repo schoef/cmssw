@@ -10,6 +10,10 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/Utilities/interface/EDMException.h"
 #include "FWCore/Framework/interface/ConstProductRegistry.h"
+#include "FWCore/Framework/interface/ModuleContextSentry.h"
+#include "FWCore/ServiceRegistry/interface/InternalContext.h"
+#include "FWCore/ServiceRegistry/interface/ModuleCallingContext.h"
+#include "FWCore/ServiceRegistry/interface/ParentContext.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "DataFormats/Common/interface/Handle.h"
 #include "DataFormats/Provenance/interface/Provenance.h"
@@ -328,40 +332,47 @@ namespace edm
   
 
 
-  void DataMixingModule::pileWorker(const EventPrincipal &ep, int bcr, int eventNr, const edm::EventSetup& ES) {  
+  void DataMixingModule::pileWorker(const EventPrincipal &ep, int bcr, int eventNr, const edm::EventSetup& ES, edm::ModuleCallingContext const* mcc) {  
 
+    InternalContext internalContext(ep.id(), mcc);
+    ParentContext parentContext(&internalContext);
+    ModuleCallingContext moduleCallingContext(&moduleDescription());
+    ModuleContextSentry moduleContextSentry(&moduleCallingContext, parentContext);
 
     LogDebug("DataMixingModule") <<"\n===============> adding pileups from event  "<<ep.id()<<" for bunchcrossing "<<bcr;
+
+    // Note:  setupPileUpEvent may modify the run and lumi numbers of the EventPrincipal to match that of the primary event.
+    setupPileUpEvent(ES);
 
     // fill in maps of hits; same code as addSignals, except now applied to the pileup events
 
     // Ecal
-    if(MergeEMDigis_) {    EMDigiWorker_->addEMPileups(bcr, &ep, eventNr, ES);}
-    else {EMWorker_->addEMPileups(bcr, &ep, eventNr); }
+    if(MergeEMDigis_) {    EMDigiWorker_->addEMPileups(bcr, &ep, eventNr, ES, &moduleCallingContext);}
+    else {EMWorker_->addEMPileups(bcr, &ep, eventNr, &moduleCallingContext); }
 
     // Hcal
     if(MergeHcalDigis_) {    
       if(MergeHcalDigisProd_) {    
-	HcalDigiWorkerProd_->addHcalPileups(bcr, &ep, eventNr, ES);
+	HcalDigiWorkerProd_->addHcalPileups(bcr, &ep, eventNr, ES, &moduleCallingContext);
       }
       else{
-	HcalDigiWorker_->addHcalPileups(bcr, &ep, eventNr, ES);}
+	HcalDigiWorker_->addHcalPileups(bcr, &ep, eventNr, ES, &moduleCallingContext);}
     }
-    else {HcalWorker_->addHcalPileups(bcr, &ep, eventNr);}
+    else {HcalWorker_->addHcalPileups(bcr, &ep, eventNr, &moduleCallingContext);}
 
     // Muon
-    MuonWorker_->addMuonPileups(bcr, &ep, eventNr);
+    MuonWorker_->addMuonPileups(bcr, &ep, eventNr, &moduleCallingContext);
 
     if(DoFastSim_){
-      GeneralTrackWorker_->addGeneralTrackPileups(bcr, &ep, eventNr);
+      GeneralTrackWorker_->addGeneralTrackPileups(bcr, &ep, eventNr, &moduleCallingContext);
     }else{
       
       // SiStrips
-      if(useSiStripRawDigi_) SiStripRawWorker_->addSiStripPileups(bcr, &ep, eventNr);
-      else SiStripWorker_->addSiStripPileups(bcr, &ep, eventNr);
+      if(useSiStripRawDigi_) SiStripRawWorker_->addSiStripPileups(bcr, &ep, eventNr, &moduleCallingContext);
+      else SiStripWorker_->addSiStripPileups(bcr, &ep, eventNr, &moduleCallingContext);
       
       // SiPixels
-      SiPixelWorker_->addSiPixelPileups(bcr, &ep, eventNr);
+      SiPixelWorker_->addSiPixelPileups(bcr, &ep, eventNr, &moduleCallingContext);
     }
 
     // check and see if we need to copy the pileup information from 
@@ -370,7 +381,7 @@ namespace edm
 
     if(MergePileup_ && !AddedPileup_){
       
-      PUWorker_->addPileupInfo(&ep, eventNr);
+      PUWorker_->addPileupInfo(&ep, eventNr, &moduleCallingContext);
 
       AddedPileup_ = true;
     }
@@ -379,7 +390,7 @@ namespace edm
 
 
   
-  void DataMixingModule::doPileUp(edm::Event &e, const edm::EventSetup& ES)
+  void DataMixingModule::doPileUp(edm::Event &e, const edm::EventSetup& ES, edm::ModuleCallingContext const* mcc)
   {
     std::vector<edm::EventID> recordEventID;
     std::vector<int> PileupList;
@@ -407,7 +418,7 @@ namespace edm
                 e.id(),
                 recordEventID,
                 boost::bind(&DataMixingModule::pileWorker, boost::ref(*this),
-                            _1, bunchCrossing, _2, boost::cref(ES)),
+                            _1, bunchCrossing, _2, boost::cref(ES), mcc),
 		NumPU_Events
                 );
       }

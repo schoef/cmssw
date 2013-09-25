@@ -28,7 +28,6 @@
 //
 // Original Author:  Chris Jones
 //         Created:  Sat Jan  7 15:40:43 EST 2006
-// $Id: FWGenericHandle.h,v 1.4 2013/02/10 22:12:04 wmtan Exp $
 //
 
 // system include files

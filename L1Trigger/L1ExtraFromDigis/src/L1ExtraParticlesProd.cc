@@ -8,7 +8,6 @@
 //
 // Original Author:  Werner Sun
 //         Created:  Mon Oct  2 22:45:32 EDT 2006
-// $Id: L1ExtraParticlesProd.cc,v 1.32 2009/12/14 22:23:14 wmtan Exp $
 //
 //
 

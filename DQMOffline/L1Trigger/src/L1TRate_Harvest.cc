@@ -1,8 +1,6 @@
 /*
  * \file L1TRate_Harvest.cc
  *
- * $Date: 2012/11/28 13:58:12 $
- * $Revision: 1.2 $
  * \author J. Pela, P. Musella
  *
  */

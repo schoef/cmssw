@@ -10,8 +10,6 @@
  *  It is a modifed version of TriggerResultsFilter that reads the 
  *  trigger expression from the database.
  *
- *  $Date: 2012/01/21 14:56:59 $
- *  $Revision: 1.2 $
  *
  *  Authors: Martin Grunewald, Andrea Bocci
  *
@@ -26,6 +24,9 @@
 #include "HLTrigger/HLTcore/interface/TriggerExpressionData.h"
 
 // forward declaration
+namespace edm {
+  class ConfigurationDescriptions;
+}
 namespace triggerExpression {
   class Evaluator;
 }
@@ -38,11 +39,12 @@ class TriggerResultsFilterFromDB : public HLTFilter {
 public:
   explicit TriggerResultsFilterFromDB(const edm::ParameterSet &);
   ~TriggerResultsFilterFromDB();
+  static void fillDescriptions(edm::ConfigurationDescriptions & descriptions);
   virtual bool hltFilter(edm::Event &, const edm::EventSetup &, trigger::TriggerFilterObjectWithRefs & filterproduct);
 
 private:
   /// read the triggerConditions from the database
-  void pathsFromSetup(const edm::EventSetup & setup);
+  void pathsFromSetup(const edm::Event &, const edm::EventSetup & setup);
 
   /// parse the logical expression into functionals
   void parse(const std::string & expression);

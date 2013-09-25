@@ -12,7 +12,6 @@
  * lexicographically by these cleaners, and the best one is placed in the
  * output collection.
  *
- * $Id $
  */
 
 #include <boost/ptr_container/ptr_vector.hpp>
@@ -51,7 +50,7 @@ class RecoTauCleanerImpl : public edm::EDProducer {
   public:
     explicit RecoTauCleanerImpl(const edm::ParameterSet& pset);
     ~RecoTauCleanerImpl() {}
-    void produce(edm::Event& evt, const edm::EventSetup& es);
+    void produce(edm::Event& evt, const edm::EventSetup& es) override;
 
   private:
     edm::InputTag tauSrc_;

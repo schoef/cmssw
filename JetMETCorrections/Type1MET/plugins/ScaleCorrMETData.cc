@@ -1,5 +1,4 @@
 // -*- C++ -*-
-// $Id: ScaleCorrMETData.cc,v 1.1 2013/01/15 06:49:06 sakuma Exp $
 
 //____________________________________________________________________________||
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -26,7 +25,7 @@ private:
   edm::InputTag inputLabel_;
   double scaleFactor_;
 
-  void produce(edm::Event&, const edm::EventSetup&);
+  void produce(edm::Event&, const edm::EventSetup&) override;
 
 };
 

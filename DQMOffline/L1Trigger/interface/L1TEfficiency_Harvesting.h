@@ -4,8 +4,6 @@
 /*
  * \file L1TEfficiencyHarvesting.h
  *
- * $Date: 2013/03/18 17:17:52 $
- * $Revision: 1.2 $
  * \author J. Pela, C. Battilana
  *
  */

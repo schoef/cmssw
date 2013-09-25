@@ -1,5 +1,4 @@
 //
-// $Id: TtSemiEvtSolutionMaker.h,v 1.21 2010/02/15 13:41:06 snaumann Exp $
 //
 
 #ifndef TopEventProducers_TtSemiEvtSolutionMaker_h

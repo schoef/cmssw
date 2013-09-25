@@ -17,8 +17,7 @@ Base class for a geometry container for a specific calorimetry
 subdetector.
 
 
-$Date: 2013/04/30 13:51:12 $
-$Revision: 1.33 $
+$Revision: 1.32 $
 \author J. Mans - Minnesota
 */
 class CaloSubdetectorGeometry {

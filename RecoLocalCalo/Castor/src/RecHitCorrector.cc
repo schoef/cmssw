@@ -13,7 +13,6 @@
 //
 // Original Author:  Hans Van Haevermaet
 //         Created:  Wed Feb 23 11:29:43 CET 2011
-// $Id: RecHitCorrector.cc,v 1.3 2011/05/13 13:20:14 hvanhaev Exp $
 //
 //
 
@@ -51,9 +50,9 @@ class RecHitCorrector : public edm::EDProducer {
       ~RecHitCorrector();
 
    private:
-      virtual void beginJob() ;
-      virtual void produce(edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+      virtual void beginJob() override ;
+      virtual void produce(edm::Event&, const edm::EventSetup&) override;
+      virtual void endJob() override ;
       
       // ----------member data ---------------------------
       edm::InputTag inputLabel_;

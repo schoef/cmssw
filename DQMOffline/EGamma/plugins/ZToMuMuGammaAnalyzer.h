@@ -86,7 +86,6 @@
  **  
  **
  **  $Id: ZToMuMuGammaAnalyzer
- **  $Date: 2012/06/27 11:54:07 $ 
  **  authors: 
  **   Nancy Marinelli, U. of Notre Dame, US  
  **   Jamie Antonelli, U. of Notre Dame, US

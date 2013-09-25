@@ -13,7 +13,6 @@
 //
 // Original Author:  Dmitry Vishnevskiy,591 R-013,+41227674265,
 //         Created:  Wed Mar  3 12:14:16 CET 2010
-// $Id: HcalDetDiagLaserMonitor.cc,v 1.21 2012/08/30 21:48:48 wdd Exp $
 //
 //
 
@@ -279,11 +278,11 @@ class HcalDetDiagLaserMonitor : public HcalBaseDQMonitor {
       }
       return &calib_data[SD][ETA+2][PHI-1];
       };   
-      void beginRun(const edm::Run& run, const edm::EventSetup& c);  
-      void endRun(const edm::Run& run, const edm::EventSetup& c);
-      void beginLuminosityBlock(const edm::LuminosityBlock& lumiSeg,const edm::EventSetup& c) ;
-      void endLuminosityBlock(const edm::LuminosityBlock& lumiSeg,const edm::EventSetup& c);
-      void analyze(const edm::Event&, const edm::EventSetup&);
+      void beginRun(const edm::Run& run, const edm::EventSetup& c) override;  
+      void endRun(const edm::Run& run, const edm::EventSetup& c) override;
+      void beginLuminosityBlock(const edm::LuminosityBlock& lumiSeg,const edm::EventSetup& c) override ;
+      void endLuminosityBlock(const edm::LuminosityBlock& lumiSeg,const edm::EventSetup& c) override;
+      void analyze(const edm::Event&, const edm::EventSetup&) override;
 
       const HcalElectronicsMap  *emap;
       edm::InputTag inputLabelDigi_;
@@ -1538,7 +1537,7 @@ char   Subdet[10],str[500];
          sprintf(str,"HcalDetDiagLaser.xml");
       }
       std::string xmlName=str;
-      ofstream xmlFile;
+      std::ofstream xmlFile;
       xmlFile.open(xmlName.c_str());
 
       xmlFile<<"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n";
@@ -1651,7 +1650,7 @@ char   Subdet[10],str[500];
       //create CALIB XML file 
       sprintf(str,"HcalDetDiagLaserCalib_%i_%i.xml",run_number,dataset_seq_number);
       std::string xmlNameCalib=str;
-      ofstream xmlFileCalib;
+      std::ofstream xmlFileCalib;
       xmlFileCalib.open(xmlNameCalib.c_str());
 
       xmlFileCalib<<"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n";
@@ -1924,7 +1923,7 @@ char str[100];
              sprintf(str,"HcalDetDiagRaddam.xml");
           }
           std::string xmlName=str;
-          ofstream xmlFile;
+          std::ofstream xmlFile;
           xmlFile.open(xmlName.c_str());
           xmlFile<<"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n";
           xmlFile<<"<ROOT>\n";

@@ -10,8 +10,6 @@
  *  It has been written as an extension of the HLTHighLevel and HLTHighLevelDev 
  *  filters.
  *
- *  $Date: 2012/01/23 00:42:36 $
- *  $Revision: 1.12 $
  *
  *  Authors: Martin Grunewald, Andrea Bocci
  *
@@ -28,6 +26,9 @@
 #include "HLTrigger/HLTcore/interface/TriggerExpressionData.h"
 
 // forward declaration
+namespace edm {
+  class ConfigurationDescriptions;
+}
 namespace triggerExpression {
   class Evaluator;
 }
@@ -40,6 +41,7 @@ class TriggerResultsFilter : public edm::EDFilter {
 public:
   explicit TriggerResultsFilter(const edm::ParameterSet &);
   ~TriggerResultsFilter();
+  static void fillDescriptions(edm::ConfigurationDescriptions & descriptions);
   virtual bool filter(edm::Event &, const edm::EventSetup &);
 
 private:

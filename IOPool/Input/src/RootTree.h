@@ -7,7 +7,7 @@ RootTree.h // used by ROOT input sources
 
 ----------------------------------------------------------------------*/
 
-#include "DataFormats/Provenance/interface/ConstBranchDescription.h"
+#include "DataFormats/Provenance/interface/BranchDescription.h"
 #include "DataFormats/Provenance/interface/ProvenanceFwd.h"
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 
@@ -26,7 +26,7 @@ class TTree;
 class TTreeCache;
 
 namespace edm {
-  struct BranchKey;
+  class BranchKey;
   class DelayedReader;
   class InputFile;
   class RootTree;
@@ -38,12 +38,12 @@ namespace edm {
     unsigned int const defaultNonEventLearningEntries = 1U;
     typedef Long64_t EntryNumber;
     struct BranchInfo {
-      BranchInfo(ConstBranchDescription const& prod) :
+      BranchInfo(BranchDescription const& prod) :
         branchDescription_(prod),
         productBranch_(0),
         provenanceBranch_(0),
         classCache_(0) {}
-      ConstBranchDescription branchDescription_;
+      BranchDescription const branchDescription_;
       TBranch* productBranch_;
       TBranch* provenanceBranch_; // For backward compatibility
       mutable TClass* classCache_;
@@ -60,6 +60,7 @@ namespace edm {
     typedef roottree::EntryNumber EntryNumber;
     RootTree(boost::shared_ptr<InputFile> filePtr,
              BranchType const& branchType,
+             unsigned int nIndexes,
              unsigned int maxVirtualSize,
              unsigned int cacheSize,
              unsigned int learningEntries,
@@ -75,17 +76,19 @@ namespace edm {
                    std::string const& oldBranchName);
     void dropBranch(std::string const& oldBranchName);
     void getEntry(TBranch *branch, EntryNumber entry) const;
-    void setPresence(BranchDescription const& prod,
+    void setPresence(BranchDescription& prod,
                    std::string const& oldBranchName);
 
     bool next() {return ++entryNumber_ < entries_;}
     bool previous() {return --entryNumber_ >= 0;}
-    bool current() {return entryNumber_ < entries_ && entryNumber_ >= 0;}
+    bool current() const {return entryNumber_ < entries_ && entryNumber_ >= 0;}
     void rewind() {entryNumber_ = 0;}
     void close();
     EntryNumber const& entryNumber() const {return entryNumber_;}
+    EntryNumber const& entryNumberForIndex(unsigned int index) const;
     EntryNumber const& entries() const {return entries_;}
     void setEntryNumber(EntryNumber theEntryNumber);
+    void insertEntryForIndex(unsigned int index);
     std::vector<std::string> const& branchNames() const {return branchNames_;}
     DelayedReader* rootDelayedReader() const;
     template <typename T>
@@ -150,6 +153,7 @@ namespace edm {
     mutable std::unordered_set<TBranch*> triggerSet_;
     EntryNumber entries_;
     EntryNumber entryNumber_;
+    std::unique_ptr<std::vector<EntryNumber> > entryNumberForIndex_;
     std::vector<std::string> branchNames_;
     boost::shared_ptr<BranchMap> branches_;
     bool trainNow_;

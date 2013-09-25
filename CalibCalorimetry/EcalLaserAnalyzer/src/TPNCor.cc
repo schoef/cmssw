@@ -1,7 +1,6 @@
 /* 
  *  \class TPNCor
  *
- *  $Date: 2012/02/09 10:08:10 $
  *  \author: Julie Malcles - CEA/Saclay
  */
 
@@ -40,7 +39,7 @@ TPNCor::TPNCor(string filename)
   char c;
   int gain;
   double aa, bb, cc;
-  ifstream fin;
+  std::ifstream fin;
   
   if( test ) {
     fclose( test );

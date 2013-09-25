@@ -115,6 +115,7 @@
 #include "DataFormats/TrackingRecHit/interface/TrackingRecHitFwd.h"
 #include "FWCore/Utilities/interface/GCC11Compatibility.h"
 #include <algorithm>
+#include <iostream>
 #include <ostream>
 
 
@@ -279,9 +280,20 @@ namespace reco {
     int numberOfInactiveHits() const;         // not-null, inactive
     int numberOfInactiveTrackerHits() const;  // not-null, inactive, tracker
 
-
-    int numberOfValidStripLayersWithMonoAndStereo () 
+    int numberOfValidStripLayersWithMonoAndStereo (uint32_t stripdet, uint32_t layer) 
       const; // count strip layers that have non-null, valid mono and stereo hits
+ 
+    int numberOfValidStripLayersWithMonoAndStereo () 
+      const {return numberOfValidStripLayersWithMonoAndStereo(0,0);}
+
+    int numberOfValidTOBLayersWithMonoAndStereo (uint32_t layer = 0) 
+      const {return numberOfValidStripLayersWithMonoAndStereo(StripSubdetector::TOB,layer);}
+    int numberOfValidTIBLayersWithMonoAndStereo (uint32_t layer = 0) 
+      const {return numberOfValidStripLayersWithMonoAndStereo(StripSubdetector::TIB,layer);}
+    int numberOfValidTIDLayersWithMonoAndStereo (uint32_t layer = 0) 
+      const {return numberOfValidStripLayersWithMonoAndStereo(StripSubdetector::TID,layer);}
+    int numberOfValidTECLayersWithMonoAndStereo (uint32_t layer = 0) 
+      const {return numberOfValidStripLayersWithMonoAndStereo(StripSubdetector::TEC,layer);} 
 
     uint32_t getTrackerLayerCase(uint32_t substr, uint32_t layer) const;
     uint32_t getTrackerMonoStereo (uint32_t substr, uint32_t layer) const;

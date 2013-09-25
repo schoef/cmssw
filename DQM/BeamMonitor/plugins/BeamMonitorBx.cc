@@ -2,8 +2,6 @@
  * \file BeamMonitorBx.cc
  * \author Geng-yuan Jeng/UC Riverside
  *         Francisco Yumiceva/FNAL
- * $Date: 2011/02/22 17:52:44 $
- * $Revision: 1.15 $
  *
  */
 
@@ -219,7 +217,7 @@ void BeamMonitorBx::BookTables(int nBx, map<string,string> & vMap, string suffix
 
 //--------------------------------------------------------
 void BeamMonitorBx::BookTrendHistos(bool plotPV,int nBx,map<string,string> & vMap,
-				    string subDir_, TString prefix_, TString suffix_) {
+				    string subDir_, const TString& prefix_, const TString& suffix_) {
   int nType_ = 2;
   if (plotPV) nType_ = 4;
   std::ostringstream ss;
@@ -467,7 +465,7 @@ void BeamMonitorBx::FillTables(int nthbx,int nthbin_,
 
 //--------------------------------------------------------
 void BeamMonitorBx::FillTrendHistos(int nthBx, int nPVs_, map<string,string> & vMap,
-				    reco::BeamSpot & bs_, TString prefix_) {
+				    reco::BeamSpot & bs_, const TString& prefix_) {
   map<TString,pair<double,double> > val_;
   val_[TString(prefix_+"_x")] = pair<double,double>(bs_.x0(),bs_.x0Error());
   val_[TString(prefix_+"_y")] = pair<double,double>(bs_.y0(),bs_.y0Error());

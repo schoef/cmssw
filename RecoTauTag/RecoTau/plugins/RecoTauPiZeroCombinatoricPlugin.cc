@@ -7,7 +7,6 @@
  * contained in the input PFJet.  Optionally, the pi zero candidates are
  * filtered by a min and max selection on their invariant mass.
  *
- * $Id $
  */
 
 #include <algorithm>
@@ -31,7 +30,7 @@ class RecoTauPiZeroCombinatoricPlugin : public RecoTauPiZeroBuilderPlugin {
     explicit RecoTauPiZeroCombinatoricPlugin(const edm::ParameterSet& pset);
     ~RecoTauPiZeroCombinatoricPlugin() {}
     // Return type is auto_ptr<PiZeroVector>
-    return_type operator()(const reco::PFJet& jet) const;
+    return_type operator()(const reco::PFJet& jet) const override;
 
   private:
     RecoTauQualityCuts qcuts_;

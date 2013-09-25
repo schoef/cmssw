@@ -360,10 +360,10 @@ void PlotAlignmentValidation::plotSS( const std::string& options, const std::str
   }
 
   int plotLayerN = 0;
-  int plotRingN  = 0;
+  //  int plotRingN  = 0;
   //  bool plotPlain = false;
   bool plotLayers = false;  // overrides plotLayerN
-  bool plotRings  = false;  // Todo: implement this?
+  //  bool plotRings  = false;  // Todo: implement this?
   bool plotSplits = false;
   int plotSubDetN = 0;     // if zero, plot all
 
@@ -440,8 +440,8 @@ void PlotAlignmentValidation::plotSS( const std::string& options, const std::str
 
 	TString subDetName;
 	switch (iSubDet) {
-	case 1: subDetName = "TPB"; break;
-	case 2: subDetName = "TPE"; break;
+	case 1: subDetName = "BPIX"; break;
+	case 2: subDetName = "FPIX"; break;
 	case 3: subDetName = "TIB"; break;
 	case 4: subDetName = "TID"; break;
 	case 5: subDetName = "TOB"; break;
@@ -503,6 +503,18 @@ void PlotAlignmentValidation::plotSS( const std::string& options, const std::str
 //------------------------------------------------------------------------------
 void PlotAlignmentValidation::plotDMR(const std::string& variable, Int_t minHits, const std::string& options)
 {
+  // If several, comma-separated values are given,
+  // call plotDMR with each value separately.
+  // If a comma is found, the string is divided to two.
+  // (no space allowed)
+  std::size_t findres = variable.find(",");
+  if ( findres != std::string::npos) {
+    std::string substring1 = variable.substr(0,         findres);
+    std::string substring2 = variable.substr(findres+1, std::string::npos);
+    plotDMR(substring1, minHits, options);
+    plotDMR(substring2, minHits, options);
+    return;
+   }
 
   // Variable name should end with X or Y. If it doesn't, recursively calls plotDMR twice with
   // X and Y added, respectively
@@ -684,8 +696,8 @@ void PlotAlignmentValidation::plotDMR(const std::string& variable, Int_t minHits
       else if (variable=="rmsNormY") plotName << "rmsNYR_";
 
       switch (i) {
-      case 1: plotName << "TPB"; break;
-      case 2: plotName << "TPE"; break;
+      case 1: plotName << "BPIX"; break;
+      case 2: plotName << "FPIX"; break;
       case 3: plotName << "TIB"; break;
       case 4: plotName << "TID"; break;
       case 5: plotName << "TOB"; break;
@@ -890,7 +902,7 @@ void  PlotAlignmentValidation::setCanvasStyle( TCanvas& canv )
   canv.SetLeftMargin  ( 0.15 );
   canv.SetRightMargin ( 0.05 );
   canv.SetBottomMargin( 0.15 );
-  canv.SetTopMargin   ( 0.10 );
+  canv.SetTopMargin   ( 0.12 );
 }
 
 //------------------------------------------------------------------------------
@@ -960,8 +972,8 @@ void  PlotAlignmentValidation::setTitleStyle( TNamed &hist,const char* titleX, c
     if (titelXAxis.Contains("rmsX")) histTitel="Distribution of the rms of the residuals in ";
     
     switch (subDetId) {
-    case 1: histTitel+="TPB";break;
-    case 2: histTitel+="TPE";break;
+    case 1: histTitel+="BPIX";break;
+    case 2: histTitel+="FPIX";break;
     case 3: histTitel+="TIB";break;
     case 4: histTitel+="TID";break;
     case 5: histTitel+="TOB";break;

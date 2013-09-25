@@ -40,7 +40,6 @@
  **  
  **
  **  $Id: PhotonOfflineClient
- **  $Date: 2012/02/08 16:03:48 $ 
  **  authors: 
  **   Nancy Marinelli, U. of Notre Dame, US  
  **   Jamie Antonelli, U. of Notre Dame, US

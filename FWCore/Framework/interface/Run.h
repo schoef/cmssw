@@ -23,6 +23,7 @@ For its usage, see "FWCore/Framework/interface/PrincipalGetAdapter.h"
 #include "FWCore/Common/interface/RunBase.h"
 #include "FWCore/Utilities/interface/EDGetToken.h"
 #include "FWCore/Utilities/interface/ProductKindOfType.h"
+#include "FWCore/Utilities/interface/RunIndex.h"
 
 #include <memory>
 #include <set>
@@ -31,11 +32,16 @@ For its usage, see "FWCore/Framework/interface/PrincipalGetAdapter.h"
 #include <vector>
 
 namespace edm {
+  class ModuleCallingContext;
   class ProducerBase;
+  namespace stream {
+    template< typename T> class ProducingModuleAdaptorBase;
+  }
 
   class Run : public RunBase {
   public:
-    Run(RunPrincipal& rp, ModuleDescription const& md);
+    Run(RunPrincipal& rp, ModuleDescription const& md,
+        ModuleCallingContext const*);
     ~Run();
 
     //Used in conjunction with EDGetToken
@@ -52,6 +58,10 @@ namespace edm {
 //     RunNumber_t run() const {return aux_.run();}
 //     Timestamp const& beginTime() const {return aux_.beginTime();}
 //     Timestamp const& endTime() const {return aux_.endTime();}
+
+    /**\return Reusable index which can be used to separate data for different simultaneous Runs.
+     */
+    RunIndex index() const;
 
     template <typename PROD>
     bool
@@ -111,6 +121,8 @@ namespace edm {
     ProcessHistory const&
     processHistory() const;
 
+    ModuleCallingContext const* moduleCallingContext() const { return moduleCallingContext_; }
+
   private:
     RunPrincipal const&
     runPrincipal() const;
@@ -121,7 +133,7 @@ namespace edm {
     // Override version from RunBase class
     virtual BasicHandle getByLabelImpl(std::type_info const& iWrapperType, std::type_info const& iProductType, InputTag const& iTag) const;
 
-    typedef std::vector<std::pair<WrapperOwningHolder, ConstBranchDescription const*> > ProductPtrVec;
+    typedef std::vector<std::pair<WrapperOwningHolder, BranchDescription const*> > ProductPtrVec;
     ProductPtrVec& putProducts() {return putProducts_;}
     ProductPtrVec const& putProducts() const {return putProducts_;}
 
@@ -129,10 +141,10 @@ namespace edm {
     // this PrincipalGetAdapter. The friendships required seems gross, but any
     // alternative is not great either.  Putting it into the
     // public interface is asking for trouble
-    friend class DaqSource;
     friend class InputSource;
     friend class RawInputSource;
     friend class ProducerBase;
+    template<typename T> friend class stream::ProducingModuleAdaptorBase;
 
     void commit_();
     void addToGotBranchIDs(Provenance const& prov) const;
@@ -142,6 +154,7 @@ namespace edm {
     RunAuxiliary const& aux_;
     typedef std::set<BranchID> BranchIDSet;
     mutable BranchIDSet gotBranchIDs_;
+    ModuleCallingContext const* moduleCallingContext_;
 
     static const std::string emptyString_;
   };
@@ -161,7 +174,7 @@ namespace edm {
       DoNotPostInsert<PROD> >::type maybe_inserter;
     maybe_inserter(product.get());
 
-    ConstBranchDescription const& desc =
+    BranchDescription const& desc =
       provRecorder_.getBranchDescription(TypeID(*product), productInstanceName);
 
     WrapperOwningHolder edp(new Wrapper<PROD>(product), Wrapper<PROD>::getInterface());
@@ -186,7 +199,7 @@ namespace edm {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)), label, productInstanceName);
     }
     result.clear();
-    BasicHandle bh = provRecorder_.getByLabel_(TypeID(typeid(PROD)), label, productInstanceName, emptyString_);
+    BasicHandle bh = provRecorder_.getByLabel_(TypeID(typeid(PROD)), label, productInstanceName, emptyString_, moduleCallingContext_);
     convert_handle(bh, result);  // throws on conversion error
     if (bh.failedToGet()) {
       return false;
@@ -202,7 +215,7 @@ namespace edm {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)), tag.label(), tag.instance());
     }
     result.clear();
-    BasicHandle bh = provRecorder_.getByLabel_(TypeID(typeid(PROD)), tag);
+    BasicHandle bh = provRecorder_.getByLabel_(TypeID(typeid(PROD)), tag, moduleCallingContext_);
     convert_handle(bh, result);  // throws on conversion error
     if (bh.failedToGet()) {
       return false;
@@ -217,7 +230,7 @@ namespace edm {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)), token);
     }
     result.clear();
-    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(PROD)),PRODUCT_TYPE, token);
+    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(PROD)),PRODUCT_TYPE, token, moduleCallingContext_);
     convert_handle(bh, result);  // throws on conversion error
     if (bh.failedToGet()) {
       return false;
@@ -232,7 +245,7 @@ namespace edm {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)), token);
     }
     result.clear();
-    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(PROD)),PRODUCT_TYPE, token);
+    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(PROD)),PRODUCT_TYPE, token, moduleCallingContext_);
     convert_handle(bh, result);  // throws on conversion error
     if (bh.failedToGet()) {
       return false;
@@ -246,7 +259,7 @@ namespace edm {
     if(!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)));
     }
-    return provRecorder_.getManyByType(results);
+    return provRecorder_.getManyByType(results, moduleCallingContext_);
   }
 
 }

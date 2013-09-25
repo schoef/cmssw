@@ -1,5 +1,4 @@
 //
-// $Id: PATPhotonProducer.cc,v 1.29 2012/05/20 20:12:25 rwolf Exp $
 //
 
 #include "PhysicsTools/PatAlgos/plugins/PATPhotonProducer.h"

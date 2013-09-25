@@ -15,7 +15,6 @@
 //
 // Original Author:  Dmytro Kovalskyi
 //         Created:  Fri Apr 21 10:59:41 PDT 2006
-// $Id: HODetIdAssociator.h,v 1.2 2011/04/21 10:49:56 innocent Exp $
 //
 //
 

@@ -1,6 +1,5 @@
 /** \class HLTJetVBFFilter
  *
- * $Id: HLTJetVBFFilter.cc,v 1.19 2012/03/05 16:07:21 srimanob Exp $
  *
  *  \author Monica Vazquez Acosta (CERN)
  *  \modifier Phst Srimanobhas (srimanob@mail.cern.ch)
@@ -11,7 +10,6 @@
 
 #include "DataFormats/Common/interface/Ref.h"
 #include "DataFormats/Common/interface/Handle.h"
-#include "DataFormats/HLTReco/interface/TriggerFilterObjectWithRefs.h"
 
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "FWCore/Framework/interface/EventSetup.h"
@@ -38,6 +36,7 @@ HLTJetVBFFilter<T>::HLTJetVBFFilter(const edm::ParameterSet& iConfig) : HLTFilte
   leadingJetOnly_ (iConfig.template getParameter<bool>   ("leadingJetOnly")),
   triggerType_    (iConfig.template getParameter<int> ("triggerType"))
 {
+  m_theObjectToken = consumes<std::vector<T>>(inputTag_);
   LogDebug("") << "HLTJetVBFFilter: Input/minPtLow_/minPtHigh_/triggerType : "
 	       << inputTag_.encode() << " "
 	       << minPtLow_  << " " 
@@ -85,7 +84,7 @@ HLTJetVBFFilter<T>::hltFilter(edm::Event& iEvent, const edm::EventSetup& iSetup,
 
   // get hold of collection of objects
   Handle<TCollection> objects;
-  iEvent.getByLabel (inputTag_,objects);
+  iEvent.getByToken (m_theObjectToken,objects);
   
   // look at all candidates, check cuts and add to filter object
   int n(0);

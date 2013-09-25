@@ -1,5 +1,4 @@
 //
-// $Id: PATMHTProducer.cc,v 1.8 2013/02/27 23:26:56 wmtan Exp $
 //
 
 #include "PhysicsTools/PatAlgos/plugins/PATMHTProducer.h"

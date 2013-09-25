@@ -11,11 +11,11 @@
 //
 // Original Author:  Dinko Ferencek,8 R-004,+41227676479,  Jeff Temple, 6-1-027
 //         Created:  Thu Mar 11 13:42:11 CET 2010
-// $Id: HcalRecHitReflagger.cc,v 1.8 2013/02/28 21:06:50 chrjones Exp $
 //
 //
 
 // system include files
+#include <iostream>
 #include <memory>
 
 // user include files

@@ -1,5 +1,4 @@
 //
-// $Id: StEvtSolutionMaker.cc,v 1.9 2008/02/17 11:09:40 rwolf Exp $
 //
 
 #include <memory>

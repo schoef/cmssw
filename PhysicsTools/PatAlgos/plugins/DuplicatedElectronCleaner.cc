@@ -1,5 +1,4 @@
 //
-// $Id: DuplicatedElectronCleaner.cc,v 1.5 2013/02/27 23:26:56 wmtan Exp $
 //
 
 /**
@@ -15,7 +14,7 @@
    which can be read through edm::View<reco::GsfElectron>
 
   \author   Giovanni Petrucciani
-  \version  $Id: DuplicatedElectronCleaner.cc,v 1.5 2013/02/27 23:26:56 wmtan Exp $
+  \version  $Id: DuplicatedElectronCleaner.cc,v 1.4 2010/02/20 21:00:16 wmtan Exp $
 */
 
 #include "FWCore/Framework/interface/Event.h"
@@ -37,7 +36,7 @@ namespace pat{
     ~DuplicatedElectronCleaner();  
     
     virtual void produce(edm::Event & iEvent, const edm::EventSetup& iSetup) override;
-    virtual void endJob();
+    virtual void endJob() override;
     
   private:
     edm::InputTag electronSrc_;

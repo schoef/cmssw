@@ -1,5 +1,4 @@
 //
-// $Id: PATMuonProducer.cc,v 1.51 2012/09/21 14:20:18 bellan Exp $
 //
 
 #include "PhysicsTools/PatAlgos/plugins/PATMuonProducer.h"

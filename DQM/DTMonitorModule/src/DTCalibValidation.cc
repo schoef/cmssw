@@ -2,8 +2,6 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2011/11/12 09:18:41 $
- *  $Revision: 1.15 $
  *  \author G. Mila - INFN Torino
  */
 
@@ -349,7 +347,7 @@ DTCalibValidation::recHitPosition(const DTRecHit1D& recHit, const DTLayer* layer
 template  <typename type>
 void DTCalibValidation::compute(const DTGeometry *dtGeom,
                               const DTRecSegment4D& segment,
-                              std::map<DTWireId, std::vector<type> > recHitsPerWire,
+                              const std::map<DTWireId, std::vector<type> >& recHitsPerWire,
                               int step) {
   bool computeResidual = true;
   
@@ -435,7 +433,7 @@ void DTCalibValidation::compute(const DTGeometry *dtGeom,
       if(recHitsPerWire.find(wireId) == recHitsPerWire.end()) {
         LogTrace("DTCalibValidation") << "   No RecHit found at Step: " << step << " in cell: " << wireId;
       } else {
-	vector<type> recHits = recHitsPerWire[wireId];
+	vector<type> recHits = recHitsPerWire.at(wireId);
 	LogTrace("DTCalibValidation") << "   " << recHits.size() << " RecHits, Step " << step << " in channel: " << wireId;
 	
 	// Get the layer

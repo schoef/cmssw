@@ -1,5 +1,4 @@
 //
-// $Id: PATPFParticleProducer.cc,v 1.6 2012/05/26 10:42:53 gpetrucc Exp $
 //
 
 #include "PhysicsTools/PatAlgos/plugins/PATPFParticleProducer.h"

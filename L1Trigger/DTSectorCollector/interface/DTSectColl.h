@@ -5,7 +5,6 @@
  *
  *
  *
- *    $Date: 2008/09/05 16:03:44 $
  *
  *    \author D. Bonacorsi, S. Marcellini
  */

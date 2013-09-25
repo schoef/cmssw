@@ -13,7 +13,6 @@
 //
 // Original Author:  Andrea Bocci
 //         Created:  Thu Nov  5 15:16:46 CET 2009
-// $Id: HLTLogMonitorFilter.cc,v 1.10 2012/01/23 00:20:21 fwyzard Exp $
 //
 
 
@@ -37,9 +36,6 @@ class HLTLogMonitorFilter : public edm::EDFilter {
 public:
     explicit HLTLogMonitorFilter(const edm::ParameterSet &);
     ~HLTLogMonitorFilter();
-
-private:
-    // ---------- private data types --------------------
 
     struct CategoryEntry {
       uint32_t threshold;       // configurable threshold, after which messages in this Category start to be logarithmically prescaled
@@ -81,13 +77,13 @@ private:
     // ---------- private methods -----------------------
 
     /// EDFilter accept method
-    virtual bool filter(edm::Event&, const edm::EventSetup &);
+    virtual bool filter(edm::Event&, const edm::EventSetup &) override;
 
     /// EDFilter beginJob method
-    virtual void beginJob(void);
+    virtual void beginJob(void) override;
 
     /// EDFilter endJob method
-    virtual void endJob(void);
+    virtual void endJob(void) override;
 
     /// check if the requested category has a valid entry
     bool knownCategory(const std::string & category);
@@ -143,7 +139,6 @@ HLTLogMonitorFilter::HLTLogMonitorFilter(const edm::ParameterSet & config) :
 HLTLogMonitorFilter::~HLTLogMonitorFilter()
 {
 }
-
 
 //
 // member functions

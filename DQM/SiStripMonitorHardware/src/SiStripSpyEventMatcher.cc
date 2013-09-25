@@ -60,10 +60,8 @@ namespace sistrip {
       eventPrincipal_()
   {
     // Use the empty parameter set for the parameter set ID of our "@MIXING" process.
-    edm::ParameterSet emptyPSet;
-    emptyPSet.registerIt();
-    processConfiguration_->setParameterSetID(emptyPSet.id());
-    source_->productRegistry()->setFrozen();
+    processConfiguration_->setParameterSetID(edm::ParameterSet::emptyParameterSetID());
+    productRegistry_->setFrozen();
 
     eventPrincipal_.reset(new edm::EventPrincipal(source_->productRegistry(),
                                                   source_->branchIDListHelper(),
@@ -78,7 +76,8 @@ namespace sistrip {
                                             *productRegistry_,
                                             boost::shared_ptr<edm::BranchIDListHelper>(new edm::BranchIDListHelper),
                                             boost::shared_ptr<edm::ActivityRegistry>(new edm::ActivityRegistry),
-                                            -1, -1);
+                                            -1, -1,
+                                            edm::PreallocationConfiguration());
     return sourceFactory->makeVectorInputSource(sourceConfig, description);
   }
 

@@ -13,7 +13,6 @@
 //
 // Original Author:  Ali Fahim,22 R-013,+41227672649,
 //         Created:  Wed Mar 23 11:42:34 CET 2011
-// $Id: HcalDigisValidation.cc,v 1.6 2012/11/12 03:39:19 lhx Exp $
 //
 //
 
@@ -944,7 +943,7 @@ void HcalDigisValidation::book1D(std::string name, int n, double min, double max
     if (!msm_->count(name)) (*msm_)[name] = dbe_->book1D(name.c_str(), name.c_str(), n, min, max);
 }
 
-void HcalDigisValidation::book1D(std::string name, HistLim limX) {
+void HcalDigisValidation::book1D(std::string name, const HistLim& limX) {
     if (!msm_->count(name)) (*msm_)[name] = dbe_->book1D(name.c_str(), name.c_str(), limX.n, limX.min, limX.max);
 }
 
@@ -952,7 +951,7 @@ void HcalDigisValidation::fill1D(std::string name, double X, double weight) {
     msm_->find(name)->second->Fill(X, weight);
 }
 
-void HcalDigisValidation::book2D(std::string name, HistLim limX, HistLim limY) {
+void HcalDigisValidation::book2D(std::string name, const HistLim& limX, const HistLim& limY) {
     if (!msm_->count(name)) (*msm_)[name] = dbe_->book2D(name.c_str(), name.c_str(), limX.n, limX.min, limX.max, limY.n, limY.min, limY.max);
 }
 
@@ -960,7 +959,7 @@ void HcalDigisValidation::fill2D(std::string name, double X, double Y, double we
     msm_->find(name)->second->Fill(X, Y, weight);
 }
 
-void HcalDigisValidation::bookPf(std::string name, HistLim limX, HistLim limY) {
+void HcalDigisValidation::bookPf(std::string name, const HistLim& limX, const HistLim& limY) {
     if (!msm_->count(name)) (*msm_)[name] = dbe_->bookProfile(name.c_str(), name.c_str(), limX.n, limX.min, limX.max, limY.n, limY.min, limY.max);
 }
 

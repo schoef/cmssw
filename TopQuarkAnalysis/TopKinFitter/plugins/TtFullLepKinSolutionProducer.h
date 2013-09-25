@@ -2,7 +2,6 @@
 #define TtFullLepKinSolutionProducer_h
 
 //
-// $Id: TtFullLepKinSolutionProducer.h,v 1.10 2010/12/02 10:48:13 snaumann Exp $
 //
 #include <memory>
 #include <string>

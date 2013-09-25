@@ -8,9 +8,7 @@
  *
  * \author Christian Veelken, UC Davis
  *
- * \version $Revision: 1.3 $
  *
- * $Id: TauGenJetDecayModeSelector.h,v 1.3 2010/02/11 00:13:19 wmtan Exp $
  *
  */
 

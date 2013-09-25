@@ -1,5 +1,4 @@
 //
-// $Id: PATLeptonCountFilter.cc,v 1.1 2008/03/06 09:23:10 llista Exp $
 //
 
 #include "PhysicsTools/PatAlgos/plugins/PATLeptonCountFilter.h"

@@ -8,7 +8,6 @@
 //
 // Original Author:  Giulio Eulisse
 //         Created:  Thu Feb 18 15:19:44 EDT 2008
-// $Id: FWItemMuonAccessors.cc,v 1.7 2010/06/18 12:44:05 yana Exp $
 //
 
 // system include files

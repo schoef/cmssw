@@ -16,7 +16,6 @@
 //
 // Original Author:  d.k.
 //         Created:  Jan CET 2006
-// $Id: PixelSimHitsTest.cc,v 1.9 2013/01/06 19:27:01 dlange Exp $
 //
 //
 // system include files

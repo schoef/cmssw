@@ -8,7 +8,7 @@
 //
 // Original Author:  Jim Pivarski
 //         Created:  Mon Mar 10 16:37:40 CDT 2008
-// $Id: MuonAlignmentInputXML.cc,v 1.17 2011/06/07 19:38:24 khotilov Exp $
+// $Id: MuonAlignmentInputXML.cc,v 1.16 2011/03/22 09:49:50 innocent Exp $
 //
 
 // system include files
@@ -224,7 +224,7 @@ void MuonAlignmentInputXML::recursiveGetId(std::map<unsigned int, Alignable*> &a
    }
 }
 
-void MuonAlignmentInputXML::fillAliToIdeal(std::map<Alignable*, Alignable*> &alitoideal, const align::Alignables alignables, const align::Alignables ideals) const {
+void MuonAlignmentInputXML::fillAliToIdeal(std::map<Alignable*, Alignable*> &alitoideal, const align::Alignables& alignables, const align::Alignables& ideals) const {
    align::Alignables::const_iterator alignable = alignables.begin();
    align::Alignables::const_iterator ideal = ideals.begin();
 

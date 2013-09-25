@@ -4,8 +4,8 @@
  *
  * \author Ian Tomalin, RAL
  *
- *  $Date: 2010/02/11 00:10:49 $
- *  $Revision: 1.2 $
+ *  $Date: 2009/10/13 12:07:49 $
+ *  $Revision: 1.1 $
  *
  */
 #include "DataFormats/TrackReco/interface/Track.h"
@@ -31,7 +31,7 @@ class RecoTrackRefSelector : public RecoTrackSelector {
   
   RecoTrackRefSelector ( double ptMin, double minRapidity, double maxRapidity,
 		         double tip, double lip, int minHit, int min3DHit, double maxChi2, 
-    		         std::vector<std::string> quality , std::vector<std::string> algorithm ) :
+    		         const std::vector<std::string>& quality , const std::vector<std::string>& algorithm ) :
           RecoTrackSelector ( ptMin, minRapidity, maxRapidity,
    		              tip, lip, minHit, min3DHit, maxChi2, 
                               quality , algorithm ) {}

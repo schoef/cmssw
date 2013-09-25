@@ -8,7 +8,6 @@
 //
 // Original Author:  
 //         Created:  Fri Nov 25 17:44:19 EST 2005
-// $Id: SimTrackManager.cc,v 1.21 2012/04/02 12:24:43 davidlt Exp $
 //
 
 // system include files

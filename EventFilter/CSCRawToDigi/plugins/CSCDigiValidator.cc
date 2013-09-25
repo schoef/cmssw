@@ -13,12 +13,12 @@
 //
 // Original Author:  Lindsey Gray
 //         Created:  Tue Jul 28 18:04:11 CEST 2009
-// $Id: CSCDigiValidator.cc,v 1.3 2011/11/01 16:31:54 asakharo Exp $
 //
 //
 
 
 // system include files
+#include <iostream>
 #include <memory>
 #include <map>
 #include <vector>

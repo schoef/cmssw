@@ -3,8 +3,6 @@
  *
  * \author Olga Kodolova
  *        
- * $Date: 2010/04/23 16:35:17 $
- * $Revision: 1.7 $
  *
  *
  * Description: Monitoring of Phi Symmetry Calibration Stream  

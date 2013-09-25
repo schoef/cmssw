@@ -8,7 +8,6 @@
 //
 // Original Author:  Werner Sun
 //         Created:  Wed Jul 26 14:42:56 EDT 2006
-// $Id: L1ParticleMap.cc,v 1.27 2007/09/27 22:31:21 ratnik Exp $
 //
 
 // system include files

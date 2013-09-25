@@ -4,8 +4,6 @@
  *    Implementation of TS Phi trigger algorithm
  *
  *
- *   $Date: 2008/09/05 15:59:57 $
- *   $Revision: 1.7 $
  *
  *   \author C. Grandi, D. Bonacorsi, S. Marcellini
  */

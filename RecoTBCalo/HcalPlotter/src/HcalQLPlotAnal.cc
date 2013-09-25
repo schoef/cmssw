@@ -13,7 +13,6 @@
 //
 // Original Author:  Phillip R. Dudero
 //         Created:  Tue Jan 16 21:11:37 CST 2007
-// $Id: HcalQLPlotAnal.cc,v 1.5 2007/12/31 18:43:18 ratnik Exp $
 //
 //
 
@@ -46,8 +45,8 @@ class HcalQLPlotAnal : public edm::EDAnalyzer {
 
 
    private:
-      virtual void analyze(const edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+      virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
+      virtual void endJob() override ;
 
       // ----------member data ---------------------------
   edm::InputTag hbheRHLabel_,hoRHLabel_,hfRHLabel_;

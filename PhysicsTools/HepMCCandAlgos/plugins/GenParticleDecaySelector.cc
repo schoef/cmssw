@@ -2,7 +2,6 @@
  *
  * \author Luca Lista, INFN
  *
- * \version $Id: GenParticleDecaySelector.cc,v 1.5 2013/02/27 23:16:51 wmtan Exp $
  *
  */
 

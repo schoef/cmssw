@@ -1,4 +1,3 @@
-// Last commit: $Id: SiStripFecCabling.cc,v 1.29 2010/02/20 20:55:05 wmtan Exp $
 
 #include "FWCore/Utilities/interface/typelookup.h"
 #include "CalibFormats/SiStripObjects/interface/SiStripFecCabling.h"

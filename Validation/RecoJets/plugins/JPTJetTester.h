@@ -4,7 +4,6 @@
 // Producer for validation histograms for JPTJet objects
 // F. Ratnikov, Sept. 7, 2006
 // Modified by J F Novak July 10, 2008
-// $Id: JPTJetTester.h,v 1.11 2012/02/15 21:41:52 kovitang Exp $
 
 #include <string>
 
@@ -33,7 +32,7 @@ public:
  
 private:
   
-  void fillMatchHists (const reco::GenJet& fGenJet, const reco::JPTJet& fJPTJet, std::vector<reco::Vertex> goodVertices);
+  void fillMatchHists (const reco::GenJet& fGenJet, const reco::JPTJet& fJPTJet, const std::vector<reco::Vertex>& goodVertices);
   double getSumPt (const reco::TrackRefVector& tracks);
 
   edm::InputTag mInputCollection;

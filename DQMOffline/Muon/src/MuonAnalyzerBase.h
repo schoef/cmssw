@@ -6,8 +6,6 @@
  *
  *  base class for all DQM monitor sources
  *
- *  $Date: 2009/12/22 17:41:56 $
- *  $Revision: 1.6 $
  *  \author G. Mila - INFN Torino
  */
 

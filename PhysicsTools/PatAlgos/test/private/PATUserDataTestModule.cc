@@ -14,7 +14,6 @@
 //
 // Original Author:  Freya Blekman
 //         Created:  Mon Apr 21 10:03:50 CEST 2008
-// $Id: PATUserDataTestModule.cc,v 1.5 2013/02/27 23:26:57 wmtan Exp $
 //
 //
 

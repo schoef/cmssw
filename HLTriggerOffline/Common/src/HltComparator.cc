@@ -1,6 +1,5 @@
 // Originally written by James Jackson
 // modified by Peter Wittich
-// $Id: HltComparator.cc,v 1.8 2010/02/25 19:14:36 wdd Exp $
 
 // user include files
 #include "HLTriggerOffline/Common/interface/HltComparator.h"
@@ -12,6 +11,7 @@
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 
 #include <TH1.h>
+#include <iostream>
 #include <vector>
 #include <string>
 

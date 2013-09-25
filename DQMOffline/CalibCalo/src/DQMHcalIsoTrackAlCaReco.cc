@@ -13,7 +13,6 @@
 //
 // Original Author:  Grigory SAFRONOV
 //         Created:  Tue Oct  14 16:10:31 CEST 2008
-// $Id: DQMHcalIsoTrackAlCaReco.cc,v 1.9 2011/03/01 21:21:29 safronov Exp $
 //
 //
 
@@ -73,9 +72,9 @@ private:
 
   DQMStore* dbe_;  
 
-  virtual void beginJob() ;
-  virtual void analyze(const edm::Event&, const edm::EventSetup&);
-  virtual void endJob() ;
+  virtual void beginJob() override ;
+  virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
+  virtual void endJob() override ;
 
   std::string folderName_;
   bool saveToFile_;

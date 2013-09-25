@@ -1,5 +1,4 @@
 //
-// $Id: PATTriggerProducer.cc,v 1.39 2013/02/27 23:26:56 wmtan Exp $
 //
 
 

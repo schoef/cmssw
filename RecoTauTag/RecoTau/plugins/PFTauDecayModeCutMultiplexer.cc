@@ -20,7 +20,6 @@
 //
 // Original Author:  Evan K. Friis, UC Davis (friis@physics.ucdavis.edu)
 //         Created:  Thurs, April 16, 2009
-// $Id: PFTauDecayModeCutMultiplexer.cc,v 1.3 2010/10/19 21:29:13 wmtan Exp $
 //
 //
 
@@ -41,8 +40,8 @@ class PFTauDecayModeCutMultiplexer : public PFTauDiscriminationProducerBase {
       typedef std::vector<ComputerAndCut>    CutList;
       typedef std::map<int, CutList::iterator> DecayModeToCutMap;
 
-      double discriminate(const PFTauRef& thePFTau);
-      void beginEvent(const edm::Event& event, const edm::EventSetup& eventSetup);
+      double discriminate(const PFTauRef& thePFTau) override;
+      void beginEvent(const edm::Event& event, const edm::EventSetup& eventSetup) override;
 
    private:
       // PFTau discriminator continaing the decaymode index of the tau collection

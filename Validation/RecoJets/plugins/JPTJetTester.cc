@@ -2,7 +2,6 @@
 // Producer for validation histograms for CaloJet objects
 // F. Ratnikov, Sept. 7, 2006
 // Modified by J F Novak July 10, 2008
-// $Id: JPTJetTester.cc,v 1.25 2013/03/19 21:24:16 kovitang Exp $
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/Framework/interface/Event.h"
@@ -728,7 +727,7 @@ if (!mEvent.isRealData()){
 
 }////Gen Close
 
-void JPTJetTester::fillMatchHists (const reco::GenJet& fGenJet, const reco::JPTJet& fJPTJet,std::vector<reco::Vertex> goodVertices) {
+void JPTJetTester::fillMatchHists (const reco::GenJet& fGenJet, const reco::JPTJet& fJPTJet,const std::vector<reco::Vertex>& goodVertices) {
   double logPtGen = log10 (fGenJet.pt());
   double PtGen = fGenJet.pt();
   double PtJpt = fJPTJet.pt();

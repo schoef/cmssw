@@ -7,7 +7,6 @@
  * stores isolation, shower shape and additional info
  * needed for identification
  * 
- * \version $Id: Photon.h,v 1.48 2012/03/26 16:44:27 nancy Exp $
  *
  */
 #include "DataFormats/RecoCandidate/interface/RecoCandidate.h"
@@ -36,7 +35,7 @@ namespace reco {
 
     /// constructor from values
     Photon( const LorentzVector & p4, 
-	    Point caloPos, 
+	    const Point& caloPos, 
 	    const PhotonCoreRef & core,  
 	    const Point & vtx = Point( 0, 0, 0 ) );
 

@@ -6,8 +6,6 @@
  * HLTFilter to select muons that points to a cylinder of configurable radius
  * and lenght.
  *
- * $Date: 2012/01/21 14:56:54 $
- * $Revision: 1.4 $
  * \author Stefano Lacaprara - INFN Legnaro <stefano.lacaprara@pd.infn.it>
  *
  */

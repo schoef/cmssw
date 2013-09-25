@@ -8,7 +8,7 @@
 //
 // Original Author:  Roberto Covarelli (CERN)
 //         Created:  Tue Jun 13 14:48:33 CEST 2006
-// $Id: EgammaHLTR9Producer.h,v 1.2 2010/06/10 16:19:31 ghezzi Exp $
+// $Id: EgammaHLTR9Producer.h,v 1.1 2010/02/11 10:06:38 ghezzi Exp $
 //
 //
 
@@ -25,9 +25,11 @@
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
-//
-// class declaration
-//
+#include "DataFormats/RecoCandidate/interface/RecoEcalCandidate.h"
+#include "DataFormats/RecoCandidate/interface/RecoEcalCandidateFwd.h"
+
+#include "DataFormats/EcalRecHit/interface/EcalRecHit.h"
+#include "DataFormats/EcalRecHit/interface/EcalRecHitCollections.h"
 
 class EgammaHLTR9Producer : public edm::EDProducer {
    public:
@@ -39,9 +41,11 @@ class EgammaHLTR9Producer : public edm::EDProducer {
    private:
       // ----------member data ---------------------------
 
-  edm::InputTag recoEcalCandidateProducer_;
+  edm::EDGetTokenT<reco::RecoEcalCandidateCollection> recoEcalCandidateProducer_;
   edm::InputTag ecalRechitEBTag_;
   edm::InputTag ecalRechitEETag_;
+  edm::EDGetTokenT<EcalRecHitCollection> ecalRechitEBToken_;
+  edm::EDGetTokenT<EcalRecHitCollection> ecalRechitEEToken_;
   bool useSwissCross_;
   
   edm::ParameterSet conf_;

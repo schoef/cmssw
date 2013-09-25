@@ -13,7 +13,6 @@
 //
 // Original Author:  Manuel Zeise
 //         Created:  Wed Oct 17 10:06:52 CEST 2007
-// $Id: EmptyEventsFilter.cc,v 1.8 2011/04/27 15:54:05 fruboes Exp $
 //
 //
 
@@ -47,9 +46,9 @@ class EmptyEventsFilter : public edm::EDFilter {
       ~EmptyEventsFilter();
 
    private:
-      virtual void beginJob() ;
-      virtual bool filter(edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+      virtual void beginJob() override ;
+      virtual bool filter(edm::Event&, const edm::EventSetup&) override;
+      virtual void endJob() override ;
 
       edm::InputTag src_;
       int target_;

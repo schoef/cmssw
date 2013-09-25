@@ -5,8 +5,6 @@
  *  Basic analyzer class which accesses 1D DTRecHits
  *  and plot resolution comparing reconstructed and simulated quantities
  *
- *  $Date: 2010/09/17 07:48:11 $
- *  $Revision: 1.10 $
  *  \author G. Cerminara - INFN Torino
  */
 
@@ -136,8 +134,8 @@ private:
   // Does the real job
   template  <typename type>
   void compute(const DTGeometry *dtGeom,
-	       std::map<DTWireId, std::vector<PSimHit> > simHitsPerWire,
-	       std::map<DTWireId, std::vector<type> > recHitsPerWire,
+	       const std::map<DTWireId, std::vector<PSimHit> >& simHitsPerWire,
+	       const std::map<DTWireId, std::vector<type> >& recHitsPerWire,
 	       int step);
   //HRes1DHit * hRes_S1RPhi;
   HRes1DHit *hRes_S1RPhi;  // RecHits, 1. step, RPh

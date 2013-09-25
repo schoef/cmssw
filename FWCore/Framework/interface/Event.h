@@ -35,6 +35,7 @@ For its usage, see "FWCore/Framework/interface/PrincipalGetAdapter.h"
 #include "FWCore/Utilities/interface/TypeID.h"
 #include "FWCore/Utilities/interface/EDGetToken.h"
 #include "FWCore/Utilities/interface/ProductKindOfType.h"
+#include "FWCore/Utilities/interface/StreamID.h"
 
 #include "boost/shared_ptr.hpp"
 
@@ -46,16 +47,21 @@ For its usage, see "FWCore/Framework/interface/PrincipalGetAdapter.h"
 
 namespace edm {
 
-  class ConstBranchDescription;
+  class BranchDescription;
+  class ModuleCallingContext;
   class TriggerResultsByName;
   class TriggerResults;
   class TriggerNames;
   class EDConsumerBase;
   class ProducerBase;
+  namespace stream {
+    template< typename T> class ProducingModuleAdaptorBase;
+  }
 
   class Event : public EventBase {
   public:
-    Event(EventPrincipal& ep, ModuleDescription const& md);
+    Event(EventPrincipal& ep, ModuleDescription const& md,
+          ModuleCallingContext const*);
     virtual ~Event();
     
     //Used in conjunction with EDGetToken
@@ -63,6 +69,11 @@ namespace edm {
     
     // AUX functions are defined in EventBase
     EventAuxiliary const& eventAuxiliary() const {return aux_;}
+    
+    ///\return The id for the particular Stream processing the Event
+    StreamID streamID() const {
+      return streamID_;
+    }
 
     LuminosityBlock const&
     getLuminosityBlock() const {
@@ -187,7 +198,9 @@ namespace edm {
     virtual edm::TriggerNames const& triggerNames(edm::TriggerResults const& triggerResults) const;
     virtual TriggerResultsByName triggerResultsByName(std::string const& process) const;
 
-    typedef std::vector<std::pair<WrapperOwningHolder, ConstBranchDescription const*> > ProductPtrVec;
+    ModuleCallingContext const* moduleCallingContext() const { return moduleCallingContext_; }
+
+    typedef std::vector<std::pair<WrapperOwningHolder, BranchDescription const*> > ProductPtrVec;
 
   private:
     EventPrincipal const&
@@ -197,7 +210,7 @@ namespace edm {
     eventPrincipal();
 
     ProductID
-    makeProductID(ConstBranchDescription const& desc) const;
+    makeProductID(BranchDescription const& desc) const;
 
     //override used by EventBase class
     virtual BasicHandle getByLabelImpl(std::type_info const& iWrapperType, std::type_info const& iProductType, InputTag const& iTag) const;
@@ -207,10 +220,10 @@ namespace edm {
     // alternative is not great either.  Putting it into the
     // public interface is asking for trouble
     friend class ProducerSourceBase;
-    friend class DaqSource;
     friend class InputSource;
     friend class RawInputSource;
     friend class ProducerBase;
+    template<typename T> friend class stream::ProducingModuleAdaptorBase;
 
     void commit_(std::vector<BranchID>* previousParentage= 0, ParentageID* previousParentageId = 0);
     void commit_aux(ProductPtrVec& products, bool record_parents, std::vector<BranchID>* previousParentage = 0, ParentageID* previousParentageId = 0);
@@ -246,6 +259,9 @@ namespace edm {
 
     // We own the retrieved Views, and have to destroy them.
     mutable std::vector<boost::shared_ptr<ViewBase> > gotViews_;
+    
+    StreamID streamID_;
+    ModuleCallingContext const* moduleCallingContext_;
 
     static const std::string emptyString_;
   };
@@ -259,7 +275,7 @@ namespace edm {
     void do_it(ptrvec_t& /*ignored*/,
                ptrvec_t& used,
                WrapperOwningHolder const& edp,
-               ConstBranchDescription const* desc) const {
+               BranchDescription const* desc) const {
       used.emplace_back(edp, desc);
     }
   };
@@ -271,7 +287,7 @@ namespace edm {
     void do_it(ptrvec_t& used,
                ptrvec_t& /*ignored*/,
                WrapperOwningHolder const& edp,
-               ConstBranchDescription const* desc) const {
+               BranchDescription const* desc) const {
       used.emplace_back(edp, desc);
     }
   };
@@ -324,7 +340,7 @@ namespace edm {
       DoNotPostInsert<PROD> >::type maybe_inserter;
     maybe_inserter(product.get());
 
-    ConstBranchDescription const& desc =
+    BranchDescription const& desc =
       provRecorder_.getBranchDescription(TypeID(*product), productInstanceName);
 
     WrapperOwningHolder edp(new Wrapper<PROD>(product), Wrapper<PROD>::getInterface());
@@ -349,7 +365,7 @@ namespace edm {
   RefProd<PROD>
   Event::getRefBeforePut(std::string const& productInstanceName) {
     PROD* p = 0;
-    ConstBranchDescription const& desc =
+    BranchDescription const& desc =
       provRecorder_.getBranchDescription(TypeID(*p), productInstanceName);
 
     //should keep track of what Ref's have been requested and make sure they are 'put'
@@ -360,7 +376,7 @@ namespace edm {
   bool
   Event::getByLabel(InputTag const& tag, Handle<PROD>& result) const {
     result.clear();
-    BasicHandle bh = provRecorder_.getByLabel_(TypeID(typeid(PROD)), tag);
+    BasicHandle bh = provRecorder_.getByLabel_(TypeID(typeid(PROD)), tag, moduleCallingContext_);
     convert_handle(bh, result);  // throws on conversion error
     if (bh.failedToGet()) {
       return false;
@@ -375,7 +391,7 @@ namespace edm {
                     std::string const& productInstanceName,
                     Handle<PROD>& result) const {
     result.clear();
-    BasicHandle bh = provRecorder_.getByLabel_(TypeID(typeid(PROD)), label, productInstanceName, emptyString_);
+    BasicHandle bh = provRecorder_.getByLabel_(TypeID(typeid(PROD)), label, productInstanceName, emptyString_, moduleCallingContext_);
     convert_handle(bh, result);  // throws on conversion error
     if (bh.failedToGet()) {
       return false;
@@ -393,7 +409,7 @@ namespace edm {
   template<typename PROD>
   void
   Event::getManyByType(std::vector<Handle<PROD> >& results) const {
-    provRecorder_.getManyByType(results);
+    provRecorder_.getManyByType(results, moduleCallingContext_);
     for(typename std::vector<Handle<PROD> >::const_iterator it = results.begin(), itEnd = results.end();
         it != itEnd; ++it) {
       addToGotBranchIDs(*it->provenance());
@@ -404,7 +420,7 @@ namespace edm {
   bool
   Event::getByToken(EDGetToken token, Handle<PROD>& result) const {
     result.clear();
-    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(PROD)),PRODUCT_TYPE, token);
+    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(PROD)),PRODUCT_TYPE, token, moduleCallingContext_);
     convert_handle(bh, result);  // throws on conversion error
     if (bh.failedToGet()) {
       return false;
@@ -417,7 +433,7 @@ namespace edm {
   bool
   Event::getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const {
     result.clear();
-    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(PROD)),PRODUCT_TYPE, token);
+    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(PROD)),PRODUCT_TYPE, token, moduleCallingContext_);
     convert_handle(bh, result);  // throws on conversion error
     if (bh.failedToGet()) {
       return false;
@@ -431,7 +447,7 @@ namespace edm {
   bool
   Event::getByLabel(InputTag const& tag, Handle<View<ELEMENT> >& result) const {
     result.clear();
-    BasicHandle bh = provRecorder_.getMatchingSequenceByLabel_(TypeID(typeid(ELEMENT)), tag);
+    BasicHandle bh = provRecorder_.getMatchingSequenceByLabel_(TypeID(typeid(ELEMENT)), tag, moduleCallingContext_);
     if(bh.failedToGet()) {
       Handle<View<ELEMENT> > h(bh.whyFailed());
       h.swap(result);
@@ -447,7 +463,7 @@ namespace edm {
                     std::string const& productInstanceName,
                     Handle<View<ELEMENT> >& result) const {
     result.clear();
-    BasicHandle bh = provRecorder_.getMatchingSequenceByLabel_(TypeID(typeid(ELEMENT)), moduleLabel, productInstanceName, emptyString_);
+    BasicHandle bh = provRecorder_.getMatchingSequenceByLabel_(TypeID(typeid(ELEMENT)), moduleLabel, productInstanceName, emptyString_, moduleCallingContext_);
     if(bh.failedToGet()) {
       Handle<View<ELEMENT> > h(bh.whyFailed());
       h.swap(result);
@@ -467,7 +483,7 @@ namespace edm {
   bool
   Event::getByToken(EDGetToken token, Handle<View<ELEMENT>>& result) const {
     result.clear();
-    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(ELEMENT)),ELEMENT_TYPE, token);
+    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(ELEMENT)),ELEMENT_TYPE, token, moduleCallingContext_);
     if(bh.failedToGet()) {
       Handle<View<ELEMENT> > h(bh.whyFailed());
       h.swap(result);
@@ -481,7 +497,7 @@ namespace edm {
   bool
   Event::getByToken(EDGetTokenT<View<ELEMENT>> token, Handle<View<ELEMENT>>& result) const {
     result.clear();
-    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(ELEMENT)),ELEMENT_TYPE, token);
+    BasicHandle bh = provRecorder_.getByToken_(TypeID(typeid(ELEMENT)),ELEMENT_TYPE, token, moduleCallingContext_);
     if(bh.failedToGet()) {
       Handle<View<ELEMENT> > h(bh.whyFailed());
       h.swap(result);

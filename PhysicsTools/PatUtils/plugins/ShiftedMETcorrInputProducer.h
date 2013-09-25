@@ -8,9 +8,7 @@
  *
  * \author Christian Veelken, LLR
  *
- * \version $Revision: 1.2 $
  *
- * $Id: ShiftedMETcorrInputProducer.h,v 1.2 2011/10/14 12:00:17 veelken Exp $
  *
  */
 

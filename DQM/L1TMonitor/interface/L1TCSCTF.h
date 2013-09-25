@@ -4,8 +4,6 @@
 /*
  * \file L1TCSCTF.h
  *
- * $Date: 2012/04/05 14:57:59 $
- * $Revision: 1.17 $
  * \author J. Berryhill
  *
 */
@@ -110,7 +108,7 @@ class L1TCSCTF : public edm::EDAnalyzer {
   std::string outputFile_; //file name for ROOT ouput
   bool verbose_;
   bool monitorDaemon_;
-  ofstream logFile_;
+  std::ofstream logFile_;
   edm::InputTag gmtProducer, lctProducer, trackProducer, statusProducer, mbProducer;
 
   CSCSectorReceiverLUT *srLUTs_[5];

@@ -13,7 +13,6 @@ Implementation:
 //
 // Original Author:  Giovanni FRANZONI
 //         Created:  Tue Jan 22 13:55:00 CET 2008
-// $Id: EcalFEDErrorFilter.cc,v 1.5 2012/01/21 14:56:53 fwyzard Exp $
 //
 //
 

@@ -4,8 +4,6 @@
 /*
  * \file L1TCSCTPG.h
  *
- * $Date: 2009/11/19 14:30:34 $
- * $Revision: 1.4 $
  * \author J. Berryhill
  *
 */
@@ -75,7 +73,7 @@ private:
   std::string outputFile_; //file name for ROOT ouput
   bool verbose_;
   bool monitorDaemon_;
-  ofstream logFile_;
+  std::ofstream logFile_;
   edm::InputTag csctpgSource_;
 };
 

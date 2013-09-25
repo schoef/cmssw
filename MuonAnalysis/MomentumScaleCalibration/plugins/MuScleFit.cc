@@ -1,16 +1,12 @@
 /** \class MuScleFit
  *  Analyzer of the Global muon tracks
  *
- *  $Date: 2012/12/20 16:09:21 $
- *  $Revision: 1.112 $
  *  \author C.Mariotti, S.Bolognesi - INFN Torino / T.Dorigo - INFN Padova
  */
 
 //  \class MuScleFit
 //  Fitter of momentum scale and resolution from resonance decays to muon track pairs
 //
-//  $Date: 2012/12/20 16:09:21 $
-//  $Revision: 1.112 $
 //  \author R. Bellan, C.Mariotti, S.Bolognesi - INFN Torino / T.Dorigo, M.De Mattia - INFN Padova
 //
 //  Recent additions:
@@ -198,14 +194,14 @@ class MuScleFit: public edm::EDLooper, MuScleFitBase
   void beginOfJobInConstructor();
   // void beginOfJob( const edm::EventSetup& eventSetup );
   // virtual void beginOfJob();
-  virtual void endOfJob();
+  virtual void endOfJob() override;
 
-  virtual void startingNewLoop( unsigned int iLoop );
+  virtual void startingNewLoop( unsigned int iLoop ) override;
 
-  virtual edm::EDLooper::Status endOfLoop( const edm::EventSetup& eventSetup, unsigned int iLoop );
+  virtual edm::EDLooper::Status endOfLoop( const edm::EventSetup& eventSetup, unsigned int iLoop ) override;
   virtual void endOfFastLoop( const unsigned int iLoop );
 
-  virtual edm::EDLooper::Status duringLoop( const edm::Event & event, const edm::EventSetup& eventSetup );
+  virtual edm::EDLooper::Status duringLoop( const edm::Event & event, const edm::EventSetup& eventSetup ) override;
   /**
    * This method performs all needed operations on the muon pair. It reads the muons from SavedPair and uses the iev
    * counter to keep track of the event number. The iev is incremented internally and reset to 0 in startingNewLoop.

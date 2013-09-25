@@ -1,5 +1,4 @@
 //
-// $Id: TriggerObjectStandAlone.cc,v 1.15 2012/04/13 21:04:55 gpetrucc Exp $
 //
 
 #include "DataFormats/PatCandidates/interface/TriggerObjectStandAlone.h"

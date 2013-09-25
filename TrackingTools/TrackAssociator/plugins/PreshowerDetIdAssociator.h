@@ -14,7 +14,6 @@
 */
 //
 // Original Author:  Dmytro Kovalskyi
-// $Id: PreshowerDetIdAssociator.h,v 1.2 2011/04/21 10:49:56 innocent Exp $
 //
 //
 

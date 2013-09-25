@@ -11,8 +11,6 @@ class HcalTopology;
 
 /** \class CaloTowerConstituentsMap
   *  
-  * $Date: 2012/08/15 14:56:18 $
-  * $Revision: 1.4 $
   * \author J. Mans - Minnesota
   */
 class CaloTowerConstituentsMap {

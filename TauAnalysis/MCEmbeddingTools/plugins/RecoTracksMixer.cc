@@ -13,7 +13,6 @@
 //
 // Original Author:  Tomasz Maciej Frueboes
 //         Created:  Fri Apr  9 12:15:56 CEST 2010
-// $Id: RecoTracksMixer.cc,v 1.3 2010/11/08 16:03:27 friis Exp $
 //
 //
 
@@ -42,9 +41,9 @@ class RecoTracksMixer : public edm::EDProducer {
       ~RecoTracksMixer();
 
    private:
-      virtual void beginJob() ;
-      virtual void produce(edm::Event&, const edm::EventSetup&);
-      virtual void endJob() ;
+      virtual void beginJob() override ;
+      virtual void produce(edm::Event&, const edm::EventSetup&) override;
+      virtual void endJob() override ;
       edm::InputTag _tracks1;
       edm::InputTag _tracks2;
 

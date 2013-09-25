@@ -8,14 +8,15 @@
  *  single jet requirement with an Energy threshold (not Et!)
  *  Based on HLTSinglet
  *
- *  $Date: 2012/02/06 15:09:21 $
- *  $Revision: 1.3 $
  *
  *  \author Jacopo Bernardini
  *
  */
 
 #include "DataFormats/HLTReco/interface/TriggerTypeDefs.h"
+#include "DataFormats/JetReco/interface/CaloJetCollection.h"
+#include "DataFormats/BTauReco/interface/JetTag.h"
+#include "DataFormats/HLTReco/interface/TriggerFilterObjectWithRefs.h"
 #include "HLTrigger/HLTcore/interface/HLTFilter.h"
 #include<string>
 
@@ -43,6 +44,8 @@ class HLTJetSortedVBFFilter : public HLTFilter {
   virtual bool hltFilter(edm::Event&, const edm::EventSetup&,trigger::TriggerFilterObjectWithRefs& filterproduct);
       
  private:
+  edm::EDGetTokenT<std::vector<T>> m_theJetsToken;
+  edm::EDGetTokenT<reco::JetTagCollection> m_theJetTagsToken;
   edm::InputTag inputJets_; 
   edm::InputTag inputJetTags_; 
   double mqq_;           

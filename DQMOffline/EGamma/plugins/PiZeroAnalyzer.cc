@@ -11,7 +11,6 @@
  **
  **
  **  $Id: PiZeroAnalyzer
- **  $Date: 2011/10/13 13:57:27 $
  **  authors:
  **   Nancy Marinelli, U. of Notre Dame, US
  **   Jamie Antonelli, U. of Notre Dame, US

@@ -13,7 +13,6 @@
 //
 // Original Author:  Chi Nhan Nguyen
 //         Created:  Fri Feb 22 09:20:55 CST 2008
-// $Id: L1TauAnalyzer.h,v 1.4 2010/01/12 06:38:12 hegner Exp $
 //
 //
 

@@ -8,9 +8,7 @@
  *
  * \author Christian Veelken, LLR
  *
- * \version $Revision: 1.1 $
  *
- * $Id: Type0PFMETcorrInputProducer.h,v 1.1 2012/04/19 17:59:40 veelken Exp $
  *
  */
 

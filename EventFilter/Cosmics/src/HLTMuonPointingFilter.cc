@@ -1,7 +1,5 @@
 /** \file
  *
- * $Date: 2012/12/26 14:10:36 $
- * $Revision: 1.6 $
  * \author Stefano Lacaprara - INFN Legnaro <stefano.lacaprara@pd.infn.it>
  */
 
