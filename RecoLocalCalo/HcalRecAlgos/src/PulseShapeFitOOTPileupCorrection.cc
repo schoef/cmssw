@@ -216,6 +216,7 @@ PulseShapeFitOOTPileupCorrection::~PulseShapeFitOOTPileupCorrection() {
 void PulseShapeFitOOTPileupCorrection::setPUParams(bool   iPedestalConstraint, bool iTimeConstraint,bool iAddPulseJitter,
 						   bool   iUnConstrainedFit,   bool iApplyTimeSlew,double iTS4Min, double iTS4Max,
 						   double iPulseJitter,double iTimeMean,double iTimeSig,double iPedMean,double iPedSig,
+						   double iM0SF,double iM21PSF,double iM23PSF,
 						   double iNoise,double iTMin,double iTMax,
 						   double its3Chi2,double its4Chi2,double its345Chi2,
 						   double iChargeThreshold,HcalTimeSlew::BiasSetting slewFlavor, int iFitTimes) { 
@@ -237,6 +238,9 @@ void PulseShapeFitOOTPileupCorrection::setPUParams(bool   iPedestalConstraint, b
   timeSig_            = iTimeSig;
   pedMean_            = iPedMean;
   pedSig_             = iPedSig;
+  M0SF_               = iM0SF;
+  M21PSF_             = iM21PSF;
+  M23PSF_             = iM23PSF;
   noise_              = iNoise;
   slewFlavor_         = slewFlavor;
   chargeThreshold_    = iChargeThreshold;
@@ -347,12 +351,16 @@ int PulseShapeFitOOTPileupCorrection::pulseShapeFit(const double * energyArr, co
    bool  fitStatus   = false;
 
    int BX[3] = {4,5,3};
-   if(ts4Chi2_ != 0) fit(1,timevalfit,chargevalfit,pedvalfit,chi2,fitStatus,tsMAX,tsTOTen,tmpy,BX);
+   if(ts4Chi2_ != 0) {
+     fit(1,timevalfit,chargevalfit,pedvalfit,chi2,fitStatus,tsMAX,tsTOTen,tmpy,BX);
+     chargevalfit*=M21PSF_;
+   }
 // Based on the pulse shape ( 2. likely gives the same performance )
    if(tmpy[2] > 3.*tmpy[3]) BX[2] = 2;
 // Only do three-pulse fit when tstrig < ts4Max_, otherwise one-pulse fit is used (above)
    if(chi2 > ts4Chi2_ && !unConstrainedFit_ && tstrig < ts4Max_)   { //fails chi2 cut goes straight to 3 Pulse fit
      fit(3,timevalfit,chargevalfit,pedvalfit,chi2,fitStatus,tsMAX,tsTOTen,tmpy,BX);
+     chargevalfit*=M23PSF_;
    }
    if(unConstrainedFit_ && nAboveThreshold > 5) { //For the old method 2 do double pulse fit if values above a threshold
      fit(2,timevalfit,chargevalfit,pedvalfit,chi2,fitStatus,tsMAX,tsTOTen,tmpy,BX); 
