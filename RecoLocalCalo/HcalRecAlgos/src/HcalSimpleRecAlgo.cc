@@ -530,6 +530,7 @@ namespace HcalSimpleRecAlgoImpl {
 
     HBHERecHit  rh(digi.id(),ampl,time);
     rh.setAux(flag);
+    //std::cout<<"flag "<<flag<<" "<<rh.aux()<<std::endl;
     setRawEnergy(rh, static_cast<float>(uncorr_ampl));
     return rh;
   }

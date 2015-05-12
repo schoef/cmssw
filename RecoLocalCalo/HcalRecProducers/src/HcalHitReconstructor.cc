@@ -514,7 +514,7 @@ void HcalHitReconstructor::produce(edm::Event& e, const edm::EventSetup& eventSe
 	// bits 28 and 29 are reserved for capid of the first time slice saved in aux
 	}
 	auxflag+=((i->sample(fTS).capid())<<28);
-	(rec->back()).setAux(auxflag);
+//	(rec->back()).setAux(auxflag);#RS 120515
 
 	// Fill second auxiliary word
 	auxflag=0;
@@ -524,7 +524,7 @@ void HcalHitReconstructor::produce(edm::Event& e, const edm::EventSetup& eventSe
 	  auxflag+=((adcv&0x7F)<<(7*(xx-fTS2))); 
 	}
 	auxflag+=((i->sample(fTS2).capid())<<28);
-	(rec->back()).setAuxHBHE(auxflag);
+//	(rec->back()).setAuxHBHE(auxflag);#RS 120515
 
 	(rec->back()).setFlags(0);  // this sets all flag bits to 0
 	// Set presample flag
@@ -631,7 +631,7 @@ void HcalHitReconstructor::produce(edm::Event& e, const edm::EventSetup& eventSe
 	  auxflag+=(i->sample(xx).adc())<<(7*(xx-fTS)); // store the time slices in the first 28 bits of aux, a set of 4 7-bit adc values
 	// bits 28 and 29 are reserved for capid of the first time slice saved in aux
 	auxflag+=((i->sample(fTS).capid())<<28);
-	(rec->back()).setAux(auxflag);
+//	(rec->back()).setAux(auxflag);#RS120515
 	(rec->back()).setFlags(0);
 	// Fill Presample ADC flag
 	if (fTS>0)
@@ -729,7 +729,7 @@ void HcalHitReconstructor::produce(edm::Event& e, const edm::EventSetup& eventSe
 	  auxflag+=(i->sample(xx).adc())<<(7*(xx-fTS)); // store the time slices in the first 28 bits of aux, a set of 4 7-bit adc values
 	// bits 28 and 29 are reserved for capid of the first time slice saved in aux
 	auxflag+=((i->sample(fTS).capid())<<28);
-	(rec->back()).setAux(auxflag);
+//	(rec->back()).setAux(auxflag);#RS 120515
 
 	// Clear flags
 	(rec->back()).setFlags(0);
