@@ -528,7 +528,8 @@ namespace HcalSimpleRecAlgoImpl {
       uncorr_ampl *= leakCorr(uncorr_ampl); 
     }
 
-    HBHERecHit  rh(digi.id(),ampl,time,flag);
+    HBHERecHit  rh(digi.id(),ampl,time);
+    rh.setAux(flag);
     setRawEnergy(rh, static_cast<float>(uncorr_ampl));
     return rh;
   }
