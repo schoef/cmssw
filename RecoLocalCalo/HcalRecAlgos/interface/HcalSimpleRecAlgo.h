@@ -90,6 +90,11 @@ public:
 		       double its3Chi2,double its4Chi2,double its345Chi2,double iChargeThreshold, int iFitTimes); 
                
   std::auto_ptr<PedestalSub> pedSubFxn_= std::auto_ptr<PedestalSub>(new PedestalSub());
+  enum PulseFit { 
+    M0,
+    SinglePulse,
+    TriplePulse
+  };
   
 private:
   bool correctForTimeslew_;

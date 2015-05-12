@@ -89,7 +89,7 @@ public:
     PulseShapeFitOOTPileupCorrection();
     ~PulseShapeFitOOTPileupCorrection();
 
-    void apply(const CaloSamples & cs, const std::vector<int> & capidvec, const HcalCalibrations & calibs, std::vector<double> & correctedOutput) const;
+    void apply(const CaloSamples & cs, const std::vector<int> & capidvec, const HcalCalibrations & calibs, std::vector<double> & correctedOutput,bool &iUseTriple) const;
     void setPUParams(bool   iPedestalConstraint, bool iTimeConstraint,bool iAddPulseJitter,bool iUnConstrainedFit,bool iApplyTimeSlew,
 		     double iTS4Min, double iTS4Max, double iPulseJitter,double iTimeMean,double iTimeSig,double iPedMean,double iPedSig,
 		     double iM0SF,double iM21PSF,double iM23PSF,
@@ -102,7 +102,7 @@ public:
     double M0SF_;
 private:
     int pulseShapeFit(const double * energyArr, const double * pedenArr, const double *chargeArr, 
-		      const double *pedArr, const double *gainArr, const double tsTOTen, std::vector<double> &fitParsVec) const;
+		      const double *pedArr, const double *gainArr, const double tsTOTen, std::vector<double> &fitParsVec, bool &iUseTriple) const;
     void fit(int iFit,float &timevalfit,float &chargevalfit,float &pedvalfit,float &chi2,bool &fitStatus,double &iTSMax,
 	     const double  &iTSTOTen,double *iEnArr,int (&iBX)[3]) const;
 
