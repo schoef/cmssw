@@ -8,13 +8,11 @@ process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("Configuration.Geometry.GeometryRecoDB_cff")
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag (process.GlobalTag, 'auto:run2_mc')
-#process.GlobalTag = GlobalTag (process.GlobalTag, '80X_mcRun2_asymptotic_2016_TrancheIV_v6')
+#process.GlobalTag = GlobalTag (process.GlobalTag, 'auto:run2_mc')
+process.GlobalTag = GlobalTag (process.GlobalTag, '80X_mcRun2_asymptotic_2016_TrancheIV_v6')
 
 ## Events to process
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(10) )
-
-from PhysicsTools.PatAlgos.patEventContent_cff import patEventContent
 
 process.out = cms.OutputModule("PoolOutputModule",
     fileName = cms.untracked.string('test.root'),
@@ -31,8 +29,6 @@ process.source = cms.Source("PoolSource",
     )
 )
 
-
-from PhysicsTools.PatAlgos.tools.jetTools import *
 ## Add PAT jet collection based on the above-defined ak4PFJetsCHS
 process.p = cms.Path()
 
