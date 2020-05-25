@@ -73,7 +73,7 @@ def create_default_config():
 
     config.Data.inputDBS = 'global'
     config.Data.splitting = 'EventAwareLumiBased'
-    config.Data.unitsPerJob = 180000
+    config.Data.unitsPerJob = 300000
     config.Data.publication = True
 
     return config
