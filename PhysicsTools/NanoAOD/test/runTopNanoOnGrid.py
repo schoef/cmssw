@@ -14,7 +14,7 @@ from Utilities.General.cmssw_das_client import get_data as myDASclient
 
 CMSSW_ROOT = os.path.join(os.environ['CMSSW_BASE'], 'src')
 NANO_ROOT = os.path.join(os.environ['CMSSW_BASE'], 'src', 'PhysicsTools', 'NanoAOD')
-PROD_TAG = "v6p1"
+PROD_TAG = "v6-1-1"
 
 def retry(nattempts, exception=None):
     """
@@ -23,7 +23,7 @@ def retry(nattempts, exception=None):
         nattempts  - Required: maximal number of attempts (Int)
         exception  - Optional: if given, only catch this exception, otherwise catch 'em all (Exception)
     """
-    
+
     def tryIt(func):
         def wrapper(*args, **kwargs):
             attempts = 0
@@ -40,6 +40,8 @@ def retry(nattempts, exception=None):
 def get_parent_DAS(dataset):
     """Retrieve parent dataset from DAS"""
     data = myDASclient("parent dataset=" + dataset)
+    if data['status'] != 'ok':
+        raise Exception("Failed retrieving parent dataset from DAS.\n{}".format(data))
     assert(len(data['data']) == 1)
     assert(len(data['data'][0]['parent']) == 1)
     return data['data'][0]['parent'][0]['name']
@@ -51,7 +53,7 @@ def get_options():
     """
     parser = argparse.ArgumentParser(description='Generate crab config files for multiple datasets.')
 
-    parser.add_argument('-e', '--era', required=False, choices=['2016', '2017', '2018'], help='Choose era (year). If not specified, run on all eras')
+    parser.add_argument('-e', '--era', required=False, choices=['2016', '2017', '2018', '2018ABC', '2018D'], help='Choose specific era. If not specified, run on all eras')
     parser.add_argument('-d', '--datasets', nargs='*', help='Json file(s) with dataset list')
     parser.add_argument('-s', '--site', required=True, help='Site to which to write the output')
     parser.add_argument('-o', '--output', default='./', help='Folder in which to write the config files')
@@ -59,7 +61,7 @@ def get_options():
     return parser.parse_args()
 
 
-def create_default_config():
+def create_default_config(is_mc):
     config = crab.config()
 
     config.General.workArea = 'tasks'
@@ -72,9 +74,14 @@ def create_default_config():
     config.JobType.numCores = 2
 
     config.Data.inputDBS = 'global'
-    config.Data.splitting = 'EventAwareLumiBased'
-    config.Data.unitsPerJob = 300000
     config.Data.publication = True
+
+    if is_mc:
+        config.Data.splitting = 'EventAwareLumiBased'
+        config.Data.unitsPerJob = 300000
+    else:
+        config.Data.splitting = 'LumiBased'
+        config.Data.unitsPerJob = 650
 
     return config
 
@@ -95,7 +102,7 @@ def findPSet(pset):
     return os.path.abspath(c)
 
 
-def writeCrabConfig(pset, dataset, metadata, era, crab_config, site, output):
+def writeCrabConfig(pset, dataset, is_mc, metadata, era, crab_config, site, output):
     c = copy.deepcopy(crab_config)
 
     c.JobType.psetName = pset
@@ -103,7 +110,7 @@ def writeCrabConfig(pset, dataset, metadata, era, crab_config, site, output):
     name = metadata.pop('name')
 
     c.General.requestName = "TopNanoAOD{}_{}__{}".format(PROD_TAG, name, era)
-    
+
     c.Data.outputDatasetTag = "TopNanoAOD{}_{}".format(PROD_TAG, era)
     c.Data.inputDataset = dataset
     c.Data.outLFNDirBase = '/store/user/{user}/topNanoAOD/{tag}/{era}/'.format(user=os.getenv('USER'), tag=PROD_TAG, era=era)
@@ -119,7 +126,7 @@ def writeCrabConfig(pset, dataset, metadata, era, crab_config, site, output):
     crab_config_file = os.path.join(output, 'crab_' + c.General.requestName + '.py')
     with open(crab_config_file, 'w') as f:
         f.write(str(c))
-    
+
     print('Configuration file saved as %r' % (crab_config_file))
 
 
@@ -137,7 +144,8 @@ if __name__ == "__main__":
         with open(dataset) as f:
             datasets.update(json.load(f))
 
-    crab_config = create_default_config()
+    crab_config_mc = create_default_config(True)
+    crab_config_data = create_default_config(False)
 
     for era, era_datasets in datasets.items():
         if options.era and era != options.era:
@@ -145,13 +153,23 @@ if __name__ == "__main__":
 
         for dataset, metadata in era_datasets.items():
             print("Working on {}".format(dataset))
-            if dataset.endswith("NANOAODSIM"):
+            if dataset.endswith("NANOAODSIM") or dataset.endswith("NANOAOD"):
                 print("Will convert from nano to mini!")
                 dataset = get_parent_DAS(dataset)
                 print(" --> Found {}".format(dataset))
-            elif (not dataset.endswith("MINIAODSIM")) and (not dataset.endswith("USER")):
+            elif (not (dataset.endswith("MINIAODSIM") or dataset.endswith("MINIAOD"))) and not dataset.endswith("USER"):
                 print("Dataset {} cannot be used - must be either nano or mini!".format(dataset))
 
-            pset = findPSet("topNano_{}_{}_cfg.py".format(PROD_TAG, era))
-            writeCrabConfig(pset, dataset, metadata, era, crab_config, options.site, options.output)
+            is_mc = dataset.endswith("SIM")
+            if is_mc:
+                print("Dataset is MC")
+                pset = findPSet("topNano_{}_{}_MC_cfg.py".format(PROD_TAG, era))
+                crab_config = crab_config_mc
+            else:
+                print("Dataset is data")
+                crab_config = crab_config_data
+                pset = findPSet("topNano_{}_{}_data_cfg.py".format(PROD_TAG, era))
+
+            year = "".join(i for i in era if i.isdigit()) # just keep the year from now on
+            writeCrabConfig(pset, dataset, is_mc, metadata, year, crab_config, options.site, options.output)
             print("")

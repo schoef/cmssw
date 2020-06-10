@@ -25,6 +25,14 @@
             "name": "TTbb_4f_TTTo2l2nu_TuneCP5-Powheg-Openloops-Pythia8"
         }
     },
+    "2018D": {
+        "/SingleMuon/Run2018D-Nano25Oct2019-v1/NANOAOD": {
+            "name": "SingleMuon_Run2018D"
+        },
+        "/EGamma/Run2018D-22Jan2019-v2/MINIAOD": {
+            "name": "EGamma_Run2018D"
+        }
+    },
     "2017": {
         "/TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17NanoAODv6-PU2017_12Apr2018_Nano25Oct2019_102X_mc2017_realistic_v7-v1/NANOAODSIM": {
             "name": "TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8"

@@ -17,8 +17,8 @@ scram b -j 8
 
 ```
 voms-proxy-init --rfc --voms cms --valid 96:00
-source /cvmfs/cms.cern.ch/common/crab-setup.sh
-cd $CMSSW_BASE/PhysicsTools/NanoAOD/test
+source /cvmfs/cms.cern.ch/common/crab-setup.sh # or .csh
+cd $CMSSW_BASE/src/PhysicsTools/NanoAOD/test
 ```
 
 You'll need to prepare a JSON file listing all the samples you want to process. An example is given in [test/topSamples.json](./topSamples.json). You can either use the name of the miniAOD dataset you want to process, or the name of the nanoAOD dataset you want to reproduce (the script will then automatically fetch the parent miniAOD dataset). Then, run:
@@ -49,6 +49,11 @@ More information about publication [here](https://twiki.cern.ch/twiki/bin/view/C
 
 ### nanoAODv6
 
+- **v6-1-1**:
+    - Note: no event content change w.r.t v6p1
+    - Add cmsDriver cfg's and adapt crab submission scripts for also running on data
+    - Fix typo in README
+    - [Full code changes](https://github.com/cms-top/cmssw/compare/CMSSW_10_2_18...topNanoV6-1-1_10_2_18)
 - **v6p1**: see detailed report [here](https://indico.cern.ch/event/921985/contributions/3873532/attachments/2043975/3423837/200525_topNanoV6p1.pdf)
     - TOP lepton MVA
     - Store NNPDF3.1 weights when available (instead of PDF4LHC)
@@ -62,8 +67,6 @@ More information about publication [here](https://twiki.cern.ch/twiki/bin/view/C
 ### nanoAODv5
 
 See instructions [here](https://github.com/demuller/privNanoAOD).
-
-List of samples [here](https://docs.google.com/spreadsheets/d/1SAtx-eRIuXwLp2WAuUw28no2wdV3dXBkQ8-a6jmYmBk/edit#gid=0).
 
 ## Contributing changes
 
