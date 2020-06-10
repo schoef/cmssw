@@ -9,7 +9,7 @@ cmsrel CMSSW_10_2_18
 cd CMSSW_10_2_18/src/
 cmsenv
 git cms-init
-git cms-checkout-topic cms-top:topNanoV6p1_10_2_18
+git cms-checkout-topic cms-top:topNanoV6-1-1_10_2_18
 scram b -j 8
 ```
 
