@@ -14,7 +14,7 @@ from Utilities.General.cmssw_das_client import get_data as myDASclient
 
 CMSSW_ROOT = os.path.join(os.environ['CMSSW_BASE'], 'src')
 NANO_ROOT = os.path.join(os.environ['CMSSW_BASE'], 'src', 'PhysicsTools', 'NanoAOD')
-PROD_TAG = "v6-1-1"
+PROD_TAG = "v6-1-2"
 
 def retry(nattempts, exception=None):
     """
@@ -78,10 +78,10 @@ def create_default_config(is_mc):
 
     if is_mc:
         config.Data.splitting = 'EventAwareLumiBased'
-        config.Data.unitsPerJob = 300000
+        config.Data.unitsPerJob = 280000
     else:
         config.Data.splitting = 'LumiBased'
-        config.Data.unitsPerJob = 650
+        config.Data.unitsPerJob = 220
 
     return config
 

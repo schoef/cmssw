@@ -1,6 +1,6 @@
 # TopNanoAOD
 
-## Recipe: setting up (v6p1)
+## Recipe: setting up (v6-1-X)
 
 Based on central nanoAOD v6, CMSSW_10_2_18. On CC7/SLC7:
 ```bash
@@ -9,7 +9,7 @@ cmsrel CMSSW_10_2_18
 cd CMSSW_10_2_18/src/
 cmsenv
 git cms-init
-git cms-checkout-topic cms-top:topNanoV6-1-1_10_2_18
+git cms-checkout-topic cms-top:topNanoV6-1-2_10_2_18
 scram b -j 8
 ```
 
@@ -49,6 +49,9 @@ More information about publication [here](https://twiki.cern.ch/twiki/bin/view/C
 
 ### nanoAODv6
 
+- **v6-1-2**:
+    - Note: no event content change w.r.t v6p1
+    - Fix DBS publication for data
 - **v6-1-1**:
     - Note: no event content change w.r.t v6p1
     - Add cmsDriver cfg's and adapt crab submission scripts for also running on data

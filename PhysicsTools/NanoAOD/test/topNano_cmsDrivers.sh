@@ -1,4 +1,4 @@
-PROD_TAG=v6-1-1
+PROD_TAG=v6-1-2
 
 function runDriverMC () {
     cmsDriver.py NANO --python_filename topNano_${PROD_TAG}_$1_MC_cfg.py --fileout file:tree.root -s NANO --mc --conditions $2 --era $3 --eventcontent NANOAODSIM --datatier NANOAODSIM --customise_commands="process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)));process.MessageLogger.cerr.FwkReport.reportEvery=1000;process.NANOAODSIMoutput.fakeNameForCrab=cms.untracked.bool(True)" --nThreads 2 -n -1 --no_exec
