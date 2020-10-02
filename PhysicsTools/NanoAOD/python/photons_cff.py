@@ -201,6 +201,10 @@ photonTable = cms.EDProducer("SimpleCandidateFlatTableProducer",
         isScEtaEB = Var("abs(superCluster().eta()) < 1.4442",bool,doc="is supercluster eta within barrel acceptance"),
         isScEtaEE = Var("abs(superCluster().eta()) > 1.566 && abs(superCluster().eta()) < 2.5",bool,doc="is supercluster eta within endcap acceptance"),
         seedGain = Var("userInt('seedGain')","uint8",doc="Gain of the seed crystal"),
+        #energyScaleUp   = Var("userFloat('energyScaleUp')/energy()",float,doc="energy uncertainty scale up",precision=6),
+        #energyScaleDown = Var("userFloat('energyScaleDown')/energy()",float,doc="energy uncertainty scale down",precision=6),
+        #energySigmaUp = Var("userFloat('energySigmaUp')/energy()",float,doc="energy uncertainty sigma up",precision=6),
+        #energySigmaDown = Var("userFloat('energySigmaDown')/energy()",float,doc="energy uncertainty sigma down",precision=6),
     )
 )
 
