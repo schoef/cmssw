@@ -15,6 +15,7 @@ from Utilities.General.cmssw_das_client import get_data as myDASclient
 CMSSW_ROOT = os.path.join(os.environ['CMSSW_BASE'], 'src')
 NANO_ROOT = os.path.join(os.environ['CMSSW_BASE'], 'src', 'PhysicsTools', 'NanoAOD')
 PROD_TAG = "v6-1-2"
+POST_TAG = "-6"
 
 def retry(nattempts, exception=None):
     """
@@ -78,10 +79,10 @@ def create_default_config(is_mc):
 
     if is_mc:
         config.Data.splitting = 'EventAwareLumiBased'
-        config.Data.unitsPerJob = 280000
+        config.Data.unitsPerJob = 50000
     else:
         config.Data.splitting = 'LumiBased'
-        config.Data.unitsPerJob = 220
+        config.Data.unitsPerJob = 50
 
     return config
 
@@ -109,11 +110,22 @@ def writeCrabConfig(pset, dataset, is_mc, metadata, era, crab_config, site, outp
 
     name = metadata.pop('name')
 
-    c.General.requestName = "TopNanoAOD{}_{}__{}".format(PROD_TAG, name, era)
+    c.General.requestName = "TopNanoAOD{}{}_{}__{}".format(PROD_TAG, POST_TAG, name, era)
 
-    c.Data.outputDatasetTag = "TopNanoAOD{}_{}".format(PROD_TAG, era)
+    if is_mc:
+        c.Data.outputDatasetTag = "TopNanoAOD{}{}_{}".format(PROD_TAG, POST_TAG, era)
+    else:
+        c.Data.outputDatasetTag = "TopNanoAOD{}{}_{}".format(PROD_TAG, POST_TAG, name)
+
+    for i in range(10):
+        s_str="ext%i"%i
+        if s_str in dataset:
+            c.Data.outputDatasetTag+= ('_'+s_str)
+            break  
+    
     c.Data.inputDataset = dataset
-    c.Data.outLFNDirBase = '/store/user/{user}/topNanoAOD/{tag}/{era}/'.format(user=os.getenv('USER'), tag=PROD_TAG, era=era)
+    #c.Data.outLFNDirBase = '/store/user/{user}/topNanoAOD/{tag}/{era}/'.format(user=os.getenv('USER'), tag=PROD_TAG, era=era)
+    c.Data.outLFNDirBase = '/store/group/phys_susy/stops2l/topNanoAOD/{tag}/{era}/'.format(user=os.getenv('USER'), tag=PROD_TAG, era=era)
     c.Site.storageSite = site
 
     # customize if asked
